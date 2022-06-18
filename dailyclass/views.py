@@ -1,3 +1,14 @@
 from django.shortcuts import render
+from . models import Post
 
-# Create your views here.
+def classmaterial(request):
+
+    #posts = Post.objects.all()
+
+    return render(
+        request,
+        'dailyclass/classmaterial.html',
+        # {
+        #     'posts': posts,
+        # }
+    )
