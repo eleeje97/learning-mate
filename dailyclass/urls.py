@@ -6,4 +6,5 @@ app_name = 'dailyclass'
 urlpatterns=[
     path('', views.classmaterial),
     path('classmaterial/', views.classmaterial),
+    path('question_form/', views.question_form),
 ]
