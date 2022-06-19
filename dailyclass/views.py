@@ -12,3 +12,7 @@ def classmaterial(request):
         #     'posts': posts,
         # }
     )
+
+
+def question_form(request):
+    return render(request, 'dailyclass/question_form.html',)
