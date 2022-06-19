@@ -212,3 +212,9 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 .idea/*
+
+# migrations 폴더
+*/migrations/
+
+# assets 폴더
+/common/static/assets
