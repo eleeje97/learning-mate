@@ -29,6 +29,26 @@
                     <form method="POST">
                         {% csrf_token %}
 
+
+                        <!-- error_form 구현 -->
+                        {% if form.errors %}
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{field.label}}</strong>
+                          {{error}}
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+
+                        {% for error in form.non_field_error %}
+                        <div class="alert alert-danger">
+                          <strong>{{error}}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+
                         <div class="mb-3">
                             <div class="form_toggle row-vh d-flex flex-row justify-content-between" >
                                 <div class="form_radio_btn radio_male">
@@ -76,6 +96,7 @@
                                 <i class="bi bi-puzzle"></i>
                             </div>
                         </div>
+
 
 
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
