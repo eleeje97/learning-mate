@@ -9,12 +9,16 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
-    <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.bubble.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.snow.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+
 </head>
 
 <body>
@@ -24,7 +28,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index.html"><img src="{% static 'assets/images/logo/logo.png' %}" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -86,17 +90,16 @@
                     </div>
                 </div>
                 <section class="section">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">이곳에 질문을 작성해주세요</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div id="editor">
-                                        <p>이 프로젝트 잘 되고 있는거 맞죠?</p>
-                                    </div>
-                                </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">무엇이 궁금하신가요?</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>이제 질문을 작성하시면 됩니다</p>
+                            <div id="full">
+                                <p>Hello World!</p>
+                                <p>Some initial <strong>bold</strong> text</p>
+                                <p><br></p>
                             </div>
                         </div>
                     </div>
@@ -115,20 +118,14 @@
             </footer>
         </div>
     </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 
-    <script src="assets/vendors/ckeditor/ckeditor.js"></script>
+    <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
+    <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
 
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-
-    <script src="assets/js/main.js"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
 </body>
 
 </html>
