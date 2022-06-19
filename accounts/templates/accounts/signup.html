@@ -20,7 +20,7 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"></a>
+                        <a href="/accounts/login"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
                     </div>
                     <h1 class="auth-title">Sign Up</h1>
                     <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
@@ -28,31 +28,31 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="name" id="name" value="{{form.name.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="이름">
+                            <input type="text" name="username" id="username" value="{{form.username.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="Username">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="username" id="username" value="{{form.username.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="아이디">
+                            <input type="text" name="name" id="name" value="{{form.name.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="Full Name">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="nickname" id="nickname" value="{{form.nickname.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="닉네임">
+                            <input type="text" name="nickname" id="nickname" value="{{form.nickname.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="Nickname">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password1" id="password1" value="{{form.password1.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="비밀번호">
+                            <input type="password" name="password1" id="password1" value="{{form.password1.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password2" id="password2" value="{{form.password2.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="비밀번호 확인">
+                            <input type="password" name="password2" id="password2" value="{{form.password2.value|default_if_none:''}}" class="form-control form-control-xl" placeholder="Confirm Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>

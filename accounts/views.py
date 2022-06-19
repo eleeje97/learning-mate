@@ -7,9 +7,11 @@ from accounts.forms import UserForm
 
 def signup(request):
     if request.method == "POST":
+        print(request.POST)
         # 회원가입에 필요한 코드를 작성한다.
         form = UserForm(request.POST)
         if form.is_valid():
+            form.name = request.POST["name"]
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
