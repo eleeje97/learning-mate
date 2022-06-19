@@ -10,4 +10,4 @@ class UserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "nickname")
+        fields = ("username", "name", "nickname", "user_type")
