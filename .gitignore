@@ -215,3 +215,6 @@ fabric.properties
 
 # migrations 폴더
 */migrations/
+
+# assets 폴더
+/common/static/assets
