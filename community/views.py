@@ -44,7 +44,7 @@ def question_create(request):
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
-            question.User = request.user
+            question.user = request.user
             question.create_date = timezone.now()
             question.save()
             return redirect('community:index')
@@ -57,7 +57,7 @@ def question_create(request):
 @login_required(login_url='accounts:login')
 def question_modify(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    if request.user != question.author:
+    if request.user != question.user:
         messages.error(request, '수정권한이 없습니다')
         return redirect('community:detail', question_id=question.id)
     if request.method == "POST":
@@ -71,3 +71,13 @@ def question_modify(request, question_id):
         form = QuestionForm(instance=question)
     context = {'form': form}
     return render(request, 'community/question_form.html', context)
+
+
+@login_required(login_url='accounts:login')
+def question_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user != question.user:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('community:detail', question_id=question.id)
+    question.delete()
+    return redirect('community:index')
