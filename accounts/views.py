@@ -21,3 +21,7 @@ def signup(request):
         # 회원가입 폼을 응답한다.
         form = UserForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
+
+def forgot_password(request):
+    return render(request, 'accounts/auth-forgot-password.html')
