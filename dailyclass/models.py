@@ -14,6 +14,9 @@ class QnA(models.Model):
     def __str__(self):
         return f'[{self.pk}] {self.qna_question}'
 
+    def get_absolute_url(self):
+        return f'/dailyclass/question/{self.qna_id}'
+
 
 class QnA_answer(models.Model):
     answer_id = models.BigAutoField(primary_key=True)
