@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 from accounts.models import User
@@ -31,3 +33,7 @@ class ClassMaterial(models.Model):
     file_url = models.FileField('uploaded_file', upload_to='class_material/')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     comment = models.CharField(max_length=500, null=True, blank=True)
+    # file_type = models.CharField(max_length=100)
+
+    def get_filename(self):
+        return os.path.basename(self.file_url.name)

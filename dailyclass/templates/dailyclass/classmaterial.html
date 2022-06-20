@@ -64,7 +64,7 @@
                                         {% csrf_token %}
 
                                         <div class="form-group mb-3">
-                                            <label for="exampleFormControlTextarea1" class="form-label">학습자료에 대해 설명해주세요.</label>
+                                            <label for="exampleFormControlTextarea1" class="form-label">업로드 할 학습자료에 대해 설명해주세요.</label>
                                             <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="2"></textarea>
                                         </div>
 
@@ -106,48 +106,43 @@
                     <!-- Basic card section start -->
                     <section id="uploaded-files">
                         <div class="row">
+                            {% for file in file_list %}
                             <div class="col-xl-4 col-md-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <h4 class="card-title">파일명</h4>
+                                            <h4 class="card-title">{{file.get_filename}}</h4>
                                             <p class="card-text">
-                                                CommentCommentCommentCommentCommentComment설명설명
+                                                {{file.comment}}
                                             </p>
                                         </div>
-                                        <img class="img-fluid w-100" src="assets/images/samples/banana.jpg"
+                                        <img class="img-fluid w-100" src="{% static 'images/ppt.jpg' %}"
                                             alt="Card image cap">
-                                        <div class="form-control-icon">
-                                    <i class="bi bi-person"></i>
-                                </div>
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
-                                        <span>작성자</span>
-                                        <button class="btn btn-light-primary">Download</button>
+                                        <span><i class="bi bi-person"></i> {{file.user_id}}</span>
+
+<!--                                        action="{% url 'dailyclass:download' file_id=file.id %}"-->
+<!--                                        <form method="post" id="file_download_delete_form">-->
+<!--                                            {% csrf_token %}-->
+<!--                                            <input type="hidden" id="file_id" value="{{file.id}}">-->
+<!--                                            <button class="btn btn-light-primary" type="submit" onclick="downloadOrDeleteFile('download')" id="download">다운로드</button>-->
+<!--                                            <button class="btn btn-light-primary" type="submit" onclick="downloadOrDeleteFile('delete')" id="delete">삭제</button>-->
+<!--                                        </form>-->
+
+                                        <form action="{% url 'dailyclass:download' file_id=file.id %}">
+                                            <button class="btn btn-light-primary" type="submit">다운로드</button>
+                                        </form>
+
+                                        {% if user == file.user_id %}
+                                        <form action="{% url 'dailyclass:delete' file_id=file.id %}">
+                                            <button class="btn btn-light-primary" type="submit">삭제</button>
+                                        </form>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="card">
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <h4 class="card-title">파일명</h4>
-                                            <p class="card-text">
-                                                CommentCommentCommentCommentCommentComment설명설명CommentCommentCommentCommentCommentComment설명설명CommentCommentCommentCommentCommentComment설명설명
-                                            </p>
-                                        </div>
-                                        <img class="img-fluid w-100" src="assets/images/samples/banana.jpg"
-                                            alt="Card image cap">
-                                        <div class="form-control-icon">
-                                    <i class="bi bi-person"></i>
-                                </div>
-                                    </div>
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <span>작성자</span>
-                                        <button class="btn btn-light-primary">Download</button>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </section>
                     <!-- Basic Card types section end -->
@@ -169,6 +164,25 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        let file_id = document.getElementById("file_id")
+        let form = document.getElementById("file_download_delete_form")
+        console.log(file_id.value)
+
+        function downloadOrDeleteFile(mode) {
+            if (mode == "download") {
+                form.action = "":
+                console.log("download!");
+            } else {
+                form.action = "";
+                console.log("delete!!!");
+            }
+            form.submit();
+        }
+
+    </script>
 
     <script src="{% static 'assets/js/main.js' %}"></script>
 
