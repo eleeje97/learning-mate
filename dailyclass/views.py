@@ -1,21 +1,18 @@
 from django.shortcuts import render
-#from . models import Post
 
 def classmaterial(request):
-
-    #posts = Post.objects.all()
-
-    return render(
-        request,
-        'dailyclass/classmaterial.html',
-        # {
-        #     'posts': posts,
-        # }
-    )
+    return render(request, 'dailyclass/classmaterial.html')
 
 
 def question_form(request):
     return render(request, 'dailyclass/question_form.html',)
 
+def upload_file(request):
+    if request.method == "POST":
+        print(request.FILES)
+        if request.FILES:
+            print('파일:',request.FILES['uploaded_file'])
+    return render(request, 'dailyclass/classmaterial.html')
+  
 def test_view(request):
     return render(request, 'dailyclass/test.html',)
