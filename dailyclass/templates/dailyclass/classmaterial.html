@@ -59,17 +59,14 @@
                                         <h4 class="card-title">파일 업로드</h4>
                                     </div>
 
-                                    <div class="card-body">
+                                <div class="card-body">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlTextarea1" class="form-label">학습자료에 대해 설명해주세요.</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                            <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="2"></textarea>
                                         </div>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <form action="{% url 'dailyclass:upload_file' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
-
 
     <!--                                        &lt;!&ndash; Basic file uploader &ndash;&gt;-->
     <!--                                        <input type="file" name="uploaded_file" class="basic-filepond">-->

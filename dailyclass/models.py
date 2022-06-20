@@ -30,4 +30,4 @@ class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     file_url = models.FileField('uploaded_file', upload_to='class_material/')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
-    comment = models.CharField(max_length=500)
+    comment = models.CharField(max_length=500, null=True, blank=True)

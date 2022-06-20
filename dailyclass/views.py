@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from .forms import QuestionForm
-from .models import QnA, QnA_answer
+from .models import QnA, QnA_answer, ClassMaterial
+
 
 def classmaterial(request):
     return render(request, 'dailyclass/classmaterial.html')
@@ -11,12 +12,25 @@ def classmaterial(request):
 def question_form(request):
     return render(request, 'dailyclass/question_form.html',)
 
+  
+def test_view(request):
+    return render(request, 'dailyclass/test.html',)
+
+
 def upload_file(request):
     if request.method == "POST":
+        print(request.POST)
         print(request.FILES)
+        print(request.user)
+        print(request.POST['comment'])
         if request.FILES:
-            print('파일:',request.FILES['uploaded_file'])
+            material = ClassMaterial(comment=request.POST['comment'], file_url=request.FILES['uploaded_file'], user_id=request.user)
+            print('파일:', request.FILES['uploaded_file'])
+            print(material)
+            material.save()
+
     return render(request, 'dailyclass/classmaterial.html')
+
   
 def test_view(request):
     return render(request, 'dailyclass/test.html',)
@@ -51,3 +65,4 @@ def question_create(request):
         form = QuestionForm()
     context = {'form': form}
     return render(request, 'dailyclass/question_form.html', context)
+
