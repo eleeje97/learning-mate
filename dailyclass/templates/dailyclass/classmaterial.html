@@ -26,150 +26,150 @@
 <body>
     <div id="app">
         {% include 'dailyclass_sidebar.html' %}
-        <div id="main">
+        <div id="main" class="layout-navbar">
             <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
+                {% include 'dailyclass_navbar.html' %}
             </header>
+            <div id="main-content">
 
-            <div class="page-heading">
-                <div class="page-title">
-                    <div class="row">
-                        <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>학습자료 공유</h3>
-                            <p class="text-subtitle text-muted">수업에 필요한 학습자료를 공유하는 공간입니다.</p>
-                        </div>
-                        <div class="col-12 col-md-6 order-md-2 order-first">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Main</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">학습자료 공유</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Basic File Browser start -->
-                <section id="input-file-browser">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">파일 업로드</h4>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="form-group mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">학습자료에 대해 설명해주세요.</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="card-body">
-                                    <form action="{% url 'dailyclass:upload_file' %}" method="POST" enctype="multipart/form-data">
-                                        {% csrf_token %}
-
-
-<!--                                        &lt;!&ndash; Basic file uploader &ndash;&gt;-->
-<!--                                        <input type="file" name="uploaded_file" class="basic-filepond">-->
-<!--                                        <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>-->
-
-
-                                        <div class="col-md-6 mb-1">
-                                            <fieldset>
-                                                <div class="input-group">
-                                                    <input type="file" class="form-control" name="uploaded_file" id="inputGroupFile04"
-                                                        aria-describedby="inputGroupFileAddon04"
-                                                        aria-label="Upload">
-                                                    <button class="btn btn-primary" type="submit"
-                                                        id="inputGroupFileAddon04">Upload</button>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Basic File Browser end -->
-
-                <!-- Uploaded Files Area start -->
                 <div class="page-heading">
-                <div class="page-title">
-                    <div class="row">
-                        <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>업로드 된 파일</h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Basic card section start -->
-                <section id="uploaded-files">
-                    <div class="row">
-                        <div class="col-xl-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <h4 class="card-title">파일명</h4>
-                                        <p class="card-text">
-                                            CommentCommentCommentCommentCommentComment설명설명
-                                        </p>
-                                    </div>
-                                    <img class="img-fluid w-100" src="assets/images/samples/banana.jpg"
-                                        alt="Card image cap">
-                                    <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h3>학습자료 공유</h3>
+                                <p class="text-subtitle text-muted">수업에 필요한 학습자료를 공유하는 공간입니다.</p>
                             </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between">
-                                    <span>작성자</span>
-                                    <button class="btn btn-light-primary">Download</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <h4 class="card-title">파일명</h4>
-                                        <p class="card-text">
-                                            CommentCommentCommentCommentCommentComment설명설명CommentCommentCommentCommentCommentComment설명설명CommentCommentCommentCommentCommentComment설명설명
-                                        </p>
-                                    </div>
-                                    <img class="img-fluid w-100" src="assets/images/samples/banana.jpg"
-                                        alt="Card image cap">
-                                    <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
-                            </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between">
-                                    <span>작성자</span>
-                                    <button class="btn btn-light-primary">Download</button>
-                                </div>
+                            <div class="col-12 col-md-6 order-md-2 order-first">
+                                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">학습자료 공유</li>
+                                    </ol>
+                                </nav>
                             </div>
                         </div>
                     </div>
-                </section>
-                <!-- Basic Card types section end -->
 
+                    <!-- Basic File Browser start -->
+                    <section id="input-file-browser">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">파일 업로드</h4>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">학습자료에 대해 설명해주세요.</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <form action="{% url 'dailyclass:upload_file' %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+
+
+    <!--                                        &lt;!&ndash; Basic file uploader &ndash;&gt;-->
+    <!--                                        <input type="file" name="uploaded_file" class="basic-filepond">-->
+    <!--                                        <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>-->
+
+
+                                            <div class="col-md-6 mb-1">
+                                                <fieldset>
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" name="uploaded_file" id="inputGroupFile04"
+                                                            aria-describedby="inputGroupFileAddon04"
+                                                            aria-label="Upload">
+                                                        <button class="btn btn-primary" type="submit"
+                                                            id="inputGroupFileAddon04">Upload</button>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Basic File Browser end -->
+
+                    <!-- Uploaded Files Area start -->
+                    <div class="page-heading">
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h3>업로드 된 파일</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Basic card section start -->
+                    <section id="uploaded-files">
+                        <div class="row">
+                            <div class="col-xl-4 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <h4 class="card-title">파일명</h4>
+                                            <p class="card-text">
+                                                CommentCommentCommentCommentCommentComment설명설명
+                                            </p>
+                                        </div>
+                                        <img class="img-fluid w-100" src="assets/images/samples/banana.jpg"
+                                            alt="Card image cap">
+                                        <div class="form-control-icon">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-between">
+                                        <span>작성자</span>
+                                        <button class="btn btn-light-primary">Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <h4 class="card-title">파일명</h4>
+                                            <p class="card-text">
+                                                CommentCommentCommentCommentCommentComment설명설명CommentCommentCommentCommentCommentComment설명설명CommentCommentCommentCommentCommentComment설명설명
+                                            </p>
+                                        </div>
+                                        <img class="img-fluid w-100" src="assets/images/samples/banana.jpg"
+                                            alt="Card image cap">
+                                        <div class="form-control-icon">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-between">
+                                        <span>작성자</span>
+                                        <button class="btn btn-light-primary">Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Basic Card types section end -->
+
+                    </div>
+                    <!-- Uploaded Files Area end -->
                 </div>
-                <!-- Uploaded Files Area end -->
+
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2021 &copy; Mazer</p>
+                        </div>
+                        <div class="float-end">
+                            <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
+                        </div>
+                    </div>
+                </footer>
             </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
 
