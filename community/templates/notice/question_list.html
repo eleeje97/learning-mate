@@ -55,7 +55,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>와글와글</h3>
+                            <h3>공지사항</h3>
 
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
@@ -159,7 +159,7 @@
     <!-- 페이징처리 끝 -->
     <a href="{% url 'community:question_create' %}" class="btn btn-primary">글쓰기</a>
 </div>
-<form id="searchForm" method="get" action="{% url 'community:chat' %}">
+<form id="searchForm" method="get" action="{% url 'community:notice' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
 </form>
