@@ -7,4 +7,5 @@ urlpatterns=[
     path('', views.classmaterial),
     path('classmaterial/', views.classmaterial),
     path('question_form/', views.question_form),
+    path('test/', views.test_view),
 ]
