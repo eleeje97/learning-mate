@@ -110,3 +110,6 @@ def answer_delete(request, answer_id):
     else:
         answer.delete()
     return redirect('community:detail', question_id=answer.question.id)
+
+def notice(request):
+    return render(request, 'community/notice.html')

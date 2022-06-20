@@ -6,8 +6,8 @@ app_name = 'community'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    # path('notice/',views.notice,name='notice'),
-    # path('sharing_information/',views.sharing_information, name='sharing_information'),
+    path('notice/',views.notice,name='notice'),
+    # path('information/',views.information, name='sharing_information'),
     # path('chat/', views.chat, name='chat')
     path('<int:question_id>/', views.detail, name='detail'),
     path('answer/create/<int:question_id>/', views.answer_create, name='answer_create'),
@@ -16,5 +16,6 @@ urlpatterns = [
     path('question/delete/<int:question_id>/', views.question_delete, name='question_delete'),
     path('answer/delete/<int:answer_id>/', views.answer_delete, name='answer_delete'),
     path('answer/modify/<int:answer_id>/', views.answer_modify, name='answer_modify'),
+
 ]
 
