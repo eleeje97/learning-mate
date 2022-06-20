@@ -16,3 +16,6 @@ def classmaterial(request):
 
 def question_form(request):
     return render(request, 'dailyclass/question_form.html',)
+
+def test_view(request):
+    return render(request, 'dailyclass/test.html',)
