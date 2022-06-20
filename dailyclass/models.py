@@ -20,17 +20,8 @@ class QnA_answer(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
 
-class Post(models.Model):
-    # user_id =
-    # file_url =
-
-    title = models.CharField(max_length=30)
+class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    content = models.TextField()
-
-    def __str__(self):
-        return f'[{self.pk}]{self.title}'
-
-# class Bookmark(models.Model):
-#     title = models.CharField(max_length=200)
-#     url = models.URLField(verbose_name='Site URL')
+    file_url = models.FileField('uploaded_file', upload_to='class_material/')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
+    comment = models.CharField(max_length=500)
