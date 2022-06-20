@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
-
 <body>
     <div id="app">
         <div id="sidebar" class="active">
@@ -9,7 +7,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                             <a href="index.html"><img src="{% static 'assets/images/logo/logo.png' %}" alt="Logo" srcset=""></a>
+
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -18,7 +16,7 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-title">목록</li>
 
                         <li class="sidebar-item">
                             <a href="{% url 'community:notice' %}" class='sidebar-link'>
@@ -57,7 +55,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>와글와글</h3>
+                            <h3>공지사항</h3>
 
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
@@ -89,10 +87,10 @@
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
-            <th class="text-center">번호</th>
-            <th class="text-center" style="width:40%">제목</th>
-            <th class="text-center">작성자</th>
-            <th class="text-center">작성일시</th>
+            <th>번호</th>
+            <th style="width:40%">제목</th>
+            <th>작성자</th>
+            <th>작성일시</th>
         </tr>
         </thead>
         <tbody>
@@ -160,27 +158,8 @@
     </ul>
     <!-- 페이징처리 끝 -->
     <a href="{% url 'community:question_create' %}" class="btn btn-primary">글쓰기</a>
-
-<footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2022 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
-                    </div>
-                </div>
-     </footer>
- <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
- <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-
- <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
- <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>
- <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
-
- <script src="{% static 'assets/js/main.js' %}"></script>
 </div>
-<form id="searchForm" method="get" action="{% url 'community:chat' %}">
+<form id="searchForm" method="get" action="{% url 'community:notice' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
 </form>

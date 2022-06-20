@@ -9,6 +9,7 @@ class QuestionForm(forms.ModelForm):
         labels = {
             'subject': '제목',
             'content': '내용',
+            'board_type' : '게시판타입'
         }
 class AnswerForm(forms.ModelForm):
     class Meta:
@@ -17,3 +18,4 @@ class AnswerForm(forms.ModelForm):
         labels = {
             'content': '답변내용',
         }
+

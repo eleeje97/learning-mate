@@ -12,6 +12,7 @@ class Question(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
+    board_type = models.CharField(max_length=6)
 
     def __str__(self):
         return self.subject
