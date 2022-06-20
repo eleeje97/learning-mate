@@ -8,4 +8,5 @@ urlpatterns=[
     path('classmaterial/', views.classmaterial),
     path('question_form/', views.question_form),
     path('upload_file/', views.upload_file, name='upload_file')
+    path('test/', views.test_view),
 ]
