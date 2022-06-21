@@ -3,15 +3,25 @@ import os
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from accounts.models import User
+from django.urls import reverse
+
 
 
 class QnA(models.Model):
+    question_tags = [('R', 'R'),
+                     ('Python', 'Python'),
+                     ('HTML', 'HTML'),
+                     ('CSS', 'CSS'),
+                     ('JavaScript', 'JavaScript'),
+                     ('Django', 'Django'),
+                     ('Others', 'Others'),
+                     ]
     qna_id = models.BigAutoField(primary_key=True)
     qna_question = RichTextUploadingField(blank=True, null=True)
-    qna_question_tag = models.CharField(max_length=50, default="others")
+    qna_question_tag = models.CharField(max_length=10, choices=question_tags)
     #qna_question = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    img_path = models.TextField(null=True)  # img가 없을수도 있으므로 null=True
+    # img_path = models.CharField(max_length=255, blank=True, null=False)  # img가 없을수도 있으므로 null=True
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     # on_delete=models.CASCADE의 의미는 이 유저의 계정이 삭제될 경우 질문도 함께 삭제된다는 의미
 
@@ -19,7 +29,7 @@ class QnA(models.Model):
         return f'[{self.qna_id}] {self.qna_question}'
 
     def get_absolute_url(self):
-        return f'/dailyclass/question/{self.qna_id}'
+        return reverse('dailyclass:single_question_page', kwargs={'qna_id': self.qna_id})
 
 
 class QnA_answer(models.Model):
