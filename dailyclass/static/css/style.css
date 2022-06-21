@@ -1,0 +1,34 @@
+{
+    margin:0;
+    padding:0;
+}
+
+table{
+    border-collapse: collapse;
+}
+caption {
+    display: none;
+}
+a{
+    text-decoration: none;
+    color: inherit;}
+
+.board_list_wrap{
+}
+
+.board_list{
+    width: 100%;
+}
+
+.board_list th,
+.board_list td{
+    border: 1px solid #999;
+}
+
+.board_list td{
+    text-align: center;
+}
+
+.board_list tbody tr td:nth-child(2){
+    background: yellow;
+}

@@ -27,6 +27,17 @@ class QnA_answer(models.Model):
     qna_answer = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
+class Quiz(models.Model):
+    quiz_id = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=50)
+    quiz_question = models.CharField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True)
+
+class QuizAnswer(models.Model):
+    quiz_id = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=50)
+    quiz_answer = models.CharField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True)
 
 class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)
