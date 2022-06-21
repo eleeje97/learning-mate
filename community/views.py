@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
@@ -22,7 +24,14 @@ def notice(request):
         ).distinct()
     paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
-    context = {'question_list': page_obj, 'page': page, 'kw': kw}
+    daytime = []
+    for i in page_obj:
+         if i.create_date >= (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)):
+             daytime.append(True)
+         else:
+             daytime.append(False)
+
+    context = {'question_list': page_obj, 'page': page, 'kw': kw, 'daytime': daytime}
     return render(request, 'notice/question_list.html', context)
 
 
@@ -212,4 +221,44 @@ def answer_delete(request, answer_id):
     else:
         answer.delete()
     return redirect('community:detail', question_id=answer.question.id)
+
+
+# class NoticeListView(ListView):
+#     def get_context_data(self, **kwargs):
+#         notice_fixed = notice.objects.filter(top_fixed=True).order_by('-registered_date')
+#         context['notice_fixed'] = notice_fixed
+# def get_queryset(self,):
+#     search_keyword = self.request.GET.get('q', '')
+#     search_type = self.request.GET.get('type', '')
+#     notice_list = notice.objects.order_by('-id')
+#     if search_keyword:
+#         if len(search_keyword) > 1:
+#             if search_type == 'all':
+#                 search_notice_list = notice_list.filter(
+#                     Q(title__icontains=search_keyword) | Q(content__icontains=search_keyword) | Q(
+#                         writer__user_id__icontains=search_keyword))
+#             elif search_type == 'title_content':
+#                 search_notice_list = notice_list.filter(
+#                     Q(title__icontains=search_keyword) | Q(content__icontains=search_keyword))
+#             elif search_type == 'title':
+#                 search_notice_list = notice_list.filter(title__icontains=search_keyword)
+#             elif search_type == 'content':
+#                 search_notice_list = notice_list.filter(content__icontains=search_keyword)
+#             elif search_type == 'writer':
+#                 search_notice_list = notice_list.filter(writer__user_id__icontains=search_keyword)
+#
+#             return redirect('community:notice')
+#         else:
+#             messages.error(self.request, '검색어는 2글자 이상 입력해주세요.')
+#     return notice_list
+
+# def get_context_data(self,  **kwargs):
+#     search_keyword = self.request.GET.get('q', '')
+#     search_type = self.request.GET.get('type', '')
+
+    # if len(search_keyword) > 1 :
+    #     context['q'] = search_keyword
+    # context['type'] = search_type
+    #
+    # return context
 
