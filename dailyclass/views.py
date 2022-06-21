@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .forms import QuestionForm
 from .models import QnA, QnA_answer, ClassMaterial, Quiz
@@ -100,7 +100,10 @@ class single_question_page(DetailView):
         object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
         return object
 
-
+class AddQuestionView(CreateView):
+    model = QnA
+    template_name = 'dailyclass/question_form.html'
+    fields = '__all__'
 
 def question_create(request):
     if request.method == 'POST':
