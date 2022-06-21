@@ -1,6 +1,6 @@
 from django import forms
 from community.models import Question, Answer
-from .models import Blog
+# from .models import Blog
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -19,7 +19,7 @@ class AnswerForm(forms.ModelForm):
             'content': '답변내용',
         }
 
-class BlogPost(forms.ModelForm):
-    class Meta:
-        model = Blog
-        fields = ['title' , 'description']
+# class BlogPost(forms.ModelForm):
+#     class Meta:
+#         model = Blog
+#         fields = ['title' , 'description']
