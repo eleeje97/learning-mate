@@ -1,57 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Form</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.bubble.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.snow.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+
+</head>
 <body>
-    <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="index.html"><img src="{% static 'assets/images/logo/logo.png' %}" alt="Logo" srcset=""></a>
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item">
-                            <a href="{% url 'community:notice' %}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>공지사항</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="{% url 'community:information' %}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>정보공유</span>
-                            </a>
-
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="{% url 'community:chat' %}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>와글와글</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
-        </div>
         <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-            </header>
-
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
@@ -62,8 +31,8 @@
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">와글와글</li>
+                                    <li class="breadcrumb-item"><a href="index.html">Community</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">정보공유</li>
                                 </ol>
                             </nav>
                         </div>
@@ -97,13 +66,14 @@
         <tbody>
         {% if question_list %}
         {% for question in question_list %}
+
         <tr class="text-center">
             <td>{{ forloop.counter }}</td>
             <td class="text-left">
                 <a href="{% url 'community:detail' question.id %}">{{ question.subject }}</a>
-                {% if question.answer_set.count > 0 %}
-                <span class="text-danger small mx-2">{{ question.answer_set.count }}</span>
-                {% endif %}
+<!--                    <script type="text/javascript">-->
+<!--                        <span>NEW</span>-->
+<!--                    </script>-->
             </td>
             <td>{{ question.user }}</td>
             <td>{{ question.create_date }}</td>
@@ -158,8 +128,9 @@
         {% endif %}
     </ul>
     <!-- 페이징처리 끝 -->
-    <a href="{% url 'community:question_create' %}" class="btn btn-primary">글쓰기</a>
-
+    {% if user.user_type == '1' %}
+    <a href="{% url 'community:notice_create' %}" class="btn btn-primary">글쓰기</a>
+    {% endif %}
 <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">

@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'dailyclass',
-    'common'
+    'common',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -54,8 +56,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'learningmate.urls'
-LOGIN_REDIRECT_URL = "/community"
+LOGIN_REDIRECT_URL = "/dailyclass"
 LOGOUT_REDIRECT_URL = "/accounts/login"
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 TEMPLATES = [
     {
@@ -113,8 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+STATICFILES_DIRS = [ BASE_DIR / '/static/',
 ]
 
 # Default primary key field type
@@ -128,3 +131,4 @@ AUTH_USER_MODEL = 'accounts.User'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

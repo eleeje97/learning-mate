@@ -40,44 +40,18 @@
         </div>
         {% endif %}
         <!-- 오류표시 End -->
-        <div class="mb-3">
+         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
                    value="{{ form.subject.value|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" name="content"
+                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
 
-            <div class="page-heading">
-                <div class="page-title">
-                    <div class="row">
-
-                        <div class="col-12 col-md-6 order-md-2 order-first">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <ol class="breadcrumb">
-
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <section class="section">
-                    <div class="card">
-                        <div class="card-header">
-                        </div>
-                        <div class="card-body">
-                            <div id="full">
-                                <div class="mb-3">
-                                    <label for="content" class="form-label">입력하세요</label>
-                                    <textarea class="form-control" name="content"
-                                              id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-            </div>
+        <input type="hidden" value="3" name="board_type">
 
         <button type="submit" class="btn btn-primary">저장하기</button>
 

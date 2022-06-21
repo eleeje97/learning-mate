@@ -20,9 +20,21 @@
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
 
+
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>-->
+<!--    <script>-->
+<!--        $(document).ready(function(){-->
+<!--            $('#id_description').summernote({-->
+<!--                height:300-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+
 </head>
 <body>
-{% include "navbar.html" %}
+{% include "community_sidebar.html" %}
+{% include "community_navbar.html" %}
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 {% block content %}
 
