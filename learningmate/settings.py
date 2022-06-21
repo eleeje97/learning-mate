@@ -54,7 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'learningmate.urls'
-LOGIN_REDIRECT_URL = "/community"
+LOGIN_REDIRECT_URL = "/dailyclass"
 LOGOUT_REDIRECT_URL = "/accounts/login"
 
 TEMPLATES = [
