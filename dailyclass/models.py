@@ -29,7 +29,7 @@ class QnA(models.Model):
         return f'[{self.qna_id}] {self.qna_question}'
 
     def get_absolute_url(self):
-        return reverse('dailyclass:single_question_page', kwargs={'qna_id': self.qna_id})
+        return reverse('dailyclass:single_question_page')
 
 
 class QnA_answer(models.Model):

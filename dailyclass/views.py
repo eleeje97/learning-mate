@@ -10,9 +10,9 @@ from django.views import View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-
-from .forms import QuestionForm
 from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
+from .forms import QuestionForm
+
 
 
 # 학습자료 공유
@@ -97,6 +97,7 @@ def test_view(request):
 class question_list(ListView):
     model = QnA
     template_name = 'dailyclass/question_list.html'
+    ordering = ['-pk']
 
 
 
@@ -104,15 +105,18 @@ class single_question_page(DetailView):
     model = QnA
     template_name = 'dailyclass/question/single_question_page.html'
 
-    def get_object(self, queryset=None):
-        object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
-        return object
+    # def get_object(self, queryset=None):
+    #     object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
+    #     return object
 
 class AddQuestionView(CreateView):
     model = QnA
     form_class = QuestionForm
-    template_name = 'dailyclass/question_form.html'
+    template_name = 'dailyclass/question/question_form.html'
     # fields = '__all__'
     # fields = ('qna_question', 'qna_question_tag')
 
-
+class UpdateQuestionView(UpdateView):
+    model = QnA
+    template_name = 'dailyclass/question/edit/question_update_form.html'
+    fields = ['qna_question', 'qna_question_tag']
