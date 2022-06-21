@@ -17,7 +17,6 @@ urlpatterns=[
     path('question/<int:qna_id>/', single_question_page.as_view(), name='single_question_page'),
     path('question_form/', AddQuestionView.as_view(), name="question_form"),
 
-    path('question/create/', views.question_create, name='question_create'),
     path('quiz/', views.quiz, name='quiz'),
     path('result/', views.result, name='result'),
     #path('save_ans/', views.save_ans, name='saveans'),

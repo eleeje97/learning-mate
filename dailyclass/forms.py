@@ -16,7 +16,7 @@ class QuestionForm(forms.ModelForm):
 
         labels = {
             'qna_question': '질문이 무엇인가요? ',
-            'qna_question_tag': '질문에 맞는 태그를 선택해주세요 ',
+            'qna_question_tag': '질문에 맞는 태그는요? ',
             # 'img_path': '이미지 경로는요? ',
             'user_id': '누가 작성하셨나요? ',
         }

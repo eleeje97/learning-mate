@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 
 from .forms import QuestionForm
@@ -107,18 +107,4 @@ class AddQuestionView(CreateView):
     # fields = '__all__'
     # fields = ('qna_question', 'qna_question_tag')
 
-def question_create(request):
-    if request.method == 'POST':
-        print(request.POST)
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            qna = form.save(commit=False)
-            qna.user_id = request.user
-            qna.qna_question = request.POST['qna_question']
-            qna.date = timezone.now()
-            qna.save()
-            return redirect('dailyclass:question_list')
-    else:
-        form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'dailyclass/question_form.html', context)
+
