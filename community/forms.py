@@ -19,7 +19,13 @@ class AnswerForm(forms.ModelForm):
             'content': '답변내용',
         }
 
-# class BlogPost(forms.ModelForm):
-#     class Meta:
-#         model = Blog
-#         fields = ['title' , 'description']
+
+class NoticeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(NoticeForm, self).__init__(*args, **kwargs)
+        self.fields['title'].label = '제목'
+        self.fields['title'].widget.attrs.update({
+            'placeholder': '제목을 입력해주세요.',
+            'class': 'form-control',
+            'autofocus': True,
+        })

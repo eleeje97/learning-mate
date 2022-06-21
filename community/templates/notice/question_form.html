@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <h5 class="my-3 border-bottom pb-2">글쓰기</h5>
 
     <form method="POST">
         {% csrf_token %}
@@ -48,6 +48,10 @@
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.js"></script>
         <script type="text/javascript" src="/static/js/lang/summernote-ko-KR.js"></script>
     </form>
+    <label>
+    {{ form.top_fixed }}
+    <span>상단에 표시하기</span>
+    </label>
     <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
