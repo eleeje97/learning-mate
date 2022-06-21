@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'dailyclass',
-    'common'
+    'common',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +58,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'learningmate.urls'
 LOGIN_REDIRECT_URL = "/community"
 LOGOUT_REDIRECT_URL = "/accounts/login"
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 TEMPLATES = [
     {

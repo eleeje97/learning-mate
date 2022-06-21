@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
@@ -32,6 +33,28 @@
         <input type="hidden" value="1" name="board_type">
 
         <button type="submit" class="btn btn-primary">저장하기</button>
+
+         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+        <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
+        <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>
+        <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
+
+
+        <script src="{% static 'assets/js/main.js' %}"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.js"></script>
+        <script type="text/javascript" src="/static/js/lang/summernote-ko-KR.js"></script>
     </form>
+    <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2022 &copy; Mazer</p>
+                    </div>
+                    <div class="float-end">
+                        <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
+                    </div>
+                </div>
+    </footer>
 </div>
 {% endblock %}

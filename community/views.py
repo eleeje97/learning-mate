@@ -92,7 +92,7 @@ def question_create(request):
             question.create_date = timezone.now()
             question.board_type = request.POST['board_type']
             question.save()
-            return redirect('community:index')
+            return redirect('community:chat')
     else:
         form = QuestionForm()
     context = {'form': form}
@@ -125,7 +125,7 @@ def question_delete(request, question_id):
         messages.error(request, '삭제권한이 없습니다')
         return redirect('community:detail', question_id=question.id)
     question.delete()
-    return redirect('community:index')
+    return redirect('community:chat')
 
 
 @login_required(login_url='accounts:login')
