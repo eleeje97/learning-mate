@@ -40,7 +40,7 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'dailyclass:classmaterial' %}">오늘의 클래스</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">질문있어요!</li>
                                     </ol>
                                 </nav>
@@ -59,6 +59,7 @@
                             <thead>
                                 <tr>
                                     <th>질문</th>
+                                    <th>태그</th>
                                     <th>게시일시</th>
                                     <th>작성자</th>
                                     <th>답변등록여부</th>
@@ -67,7 +68,10 @@
                             <tbody>
                                 {% for q in object_list %}
                                 <tr>
-                                    <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question }}</a></td>
+                                    <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question }}</a>
+                                    - <a href="{% url 'dailyclass:question_update_form' q.pk %}"
+                                        class="badge bg-secondary">수정하기</a> </td>
+                                    <td>{{ q.qna_question_tag }}</td>
                                     <td>{{ q.date }}</td>
                                     <td>{{ q.user_id }}</td>
                                     <td>

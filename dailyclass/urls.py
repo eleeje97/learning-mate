@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 
-from .views import FileDownloadView, question_list, single_question_page, AddQuestionView
+from .views import FileDownloadView, question_list, single_question_page, AddQuestionView, UpdateQuestionView
 
 app_name = 'dailyclass'
 
@@ -14,8 +14,9 @@ urlpatterns=[
 
     path('test/', views.test_view),
     path('question_list/', question_list.as_view(), name='question_list'),
-    path('question/<int:qna_id>/', single_question_page.as_view(), name='single_question_page'),
-    path('question_form/', AddQuestionView.as_view(), name="question_form"),
+    path('question/<int:pk>/', single_question_page.as_view(), name='single_question_page'),
+    path('question/question_form/', AddQuestionView.as_view(), name="question_form"),
+    path('question/edit/<int:pk>', UpdateQuestionView.as_view(), name='question_update_form'),
 
     path('quiz/', views.quiz, name='quiz'),
     path('result/', views.result, name='result'),
