@@ -50,19 +50,21 @@
                                 <span>정보공유</span>
                             </a>
                         </li>
-
+                        {% if user.user_type == '0' %}
                         <li class="sidebar-item">
                             <a href="{% url 'community:chat' %}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>와글와글</span>
                             </a>
                         </li>
+                        {% endif%}
 
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
+
         <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
          <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 
