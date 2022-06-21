@@ -25,9 +25,9 @@ class Answer(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
 
-class Blog(models.Model):
-    title = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-    description = RichTextUploadingField(blank=True,null=True)
-    body = models.TextField()
-#    username = models.CharField(max_length=50)
+# class Blog(models.Model):
+#     title = models.CharField(max_length=200)
+#     pub_date = models.DateTimeField('date published')
+#     description = RichTextUploadingField(blank=True,null=True)
+#     body = models.TextField()
+# #    username = models.CharField(max_length=50)

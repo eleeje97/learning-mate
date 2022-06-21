@@ -6,6 +6,3 @@ class QuestionForm(forms.ModelForm):
     class Meta:
         model = QnA  # 사용할 모델
         fields = ['qna_question']
-        labels = {
-            'qna_question': '질문',
-        }

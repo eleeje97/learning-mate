@@ -4,7 +4,7 @@
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
 
-    <form method="post">
+    <form method="POST">
         {% csrf_token %}
         <!-- 오류표시 Start -->
         {% if form.errors %}
