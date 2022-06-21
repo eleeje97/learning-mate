@@ -9,7 +9,7 @@ from django.views import View
 from django.views.generic.detail import SingleObjectMixin
 
 from .forms import QuestionForm
-from .models import QnA, QnA_answer, ClassMaterial
+from .models import QnA, QnA_answer, ClassMaterial, Quiz
 
 
 # 학습자료 공유
@@ -72,6 +72,14 @@ def delete_file(request, file_id):
 
 
 # Quiz
+lst=[]
+def home(request):
+    return render(request, 'quiz.html')
+
+def quiz(request):
+    template_name = 'dailyclass/quiz.html'
+    obj = Quiz.objects.all()
+    return render(request, template_name, {"obj":obj})
 
 
 # 질문있어요!
@@ -115,4 +123,3 @@ def question_create(request):
         form = QuestionForm()
     context = {'form': form}
     return render(request, 'dailyclass/question_form.html', context)
-
