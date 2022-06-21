@@ -102,8 +102,10 @@ class single_question_page(DetailView):
 
 class AddQuestionView(CreateView):
     model = QnA
+    form_class = QuestionForm
     template_name = 'dailyclass/question_form.html'
-    fields = '__all__'
+    # fields = '__all__'
+    # fields = ('qna_question', 'qna_question_tag')
 
 def question_create(request):
     if request.method == 'POST':
