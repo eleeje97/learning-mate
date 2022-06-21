@@ -28,16 +28,23 @@ class QnA_answer(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
 class Quiz(models.Model):
-    quiz_id = models.CharField(max_length=200)
-    user_id = models.CharField(max_length=50)
+    quiz_id = models.BigAutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, max_length=50, db_column='user_id')
     quiz_question = models.CharField(max_length=200)
-    date = models.DateTimeField(auto_now_add=True)
+    option1 = models.CharField(max_length=200)
+    option2 = models.CharField(max_length=200)
+    option3 = models.CharField(max_length=200)
+    option4 = models.CharField(max_length=200)
+    answer = models.IntegerField()
 
-class QuizAnswer(models.Model):
-    quiz_id = models.CharField(max_length=200)
-    user_id = models.CharField(max_length=50)
-    quiz_answer = models.CharField(max_length=200)
-    date = models.DateTimeField(auto_now_add=True)
+class result(models.Model):
+    result_id = models.BigAutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
+    quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE,db_column='quiz_id')
+    answer_num = models.IntegerField()
+    checking = models.BooleanField()
+
+
 
 class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)

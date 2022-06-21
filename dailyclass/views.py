@@ -7,9 +7,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
+from django.core.paginator import Paginator
+
+
 
 from .forms import QuestionForm
-from .models import QnA, QnA_answer, ClassMaterial, Quiz
+from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
 
 
 # 학습자료 공유
@@ -70,17 +73,15 @@ def delete_file(request, file_id):
     return redirect('dailyclass:classmaterial')
 
 
-
-# Quiz
-lst=[]
-def home(request):
-    return render(request, 'quiz.html')
-
+#퀴즈
 def quiz(request):
-    template_name = 'dailyclass/quiz.html'
-    obj = Quiz.objects.all()
-    return render(request, template_name, {"obj":obj})
+    quiz = Quiz.objects.get(pk=1)
 
+    return render(request, 'dailyclass/quiz/quiz.html',{"quiz":quiz})
+
+def result(request):
+    res = result.object.all()
+    return render(request, 'dailyclass/quiz/result.html', {"res":res})
 
 # 질문있어요!
 def question_form(request):
