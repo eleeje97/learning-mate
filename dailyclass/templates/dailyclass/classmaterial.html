@@ -65,11 +65,10 @@
 
                     <script>
                         date_input = document.getElementById('date');
-                        date_input.valueAsDate = new Date();
-                        console.log(date_input.value);
+                        date_input.value = "{{date|safe}}";
 
-                        date_input.addEventListener('blur', function(e){
-                            console.log(date_input.value);
+                        date_input.addEventListener('change', function(e){
+                            window.location.href= "/dailyclass/classmaterial?date=" + date_input.value;
                         }, false);
                     </script>
 
