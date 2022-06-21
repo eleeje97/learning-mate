@@ -108,8 +108,9 @@
         {% endif %}
     </ul>
     <!-- 페이징처리 끝 -->
+    {% if user.user_type == '1' %}
     <a href="{% url 'community:notice_create' %}" class="btn btn-primary">글쓰기</a>
-
+    {% endif %}
 <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">

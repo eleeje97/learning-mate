@@ -13,4 +13,4 @@ urlpatterns = [
     path('dailyclass/', include('dailyclass.urls')),
     path('community/', include('community.urls')),
     #path('ckeditor/', include('ckeditor_uploader.urls')),
-] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]    # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
