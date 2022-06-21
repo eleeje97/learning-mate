@@ -87,3 +87,24 @@
         </div>
     </div>
 </nav>
+
+
+<!-- 날짜 선택 -->
+<div id="main-content">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h5>날짜 선택</h5>
+            <input class="form-control" id="date" type="date" max="9999-12-31">
+        </div>
+    </div>
+</div>
+
+<script>
+    date_input = document.getElementById('date');
+    date_input.valueAsDate = new Date();
+    console.log(date_input.value);
+
+    date_input.addEventListener('blur', function(e){
+        console.log(date_input.value);
+    }, false);
+</script>
