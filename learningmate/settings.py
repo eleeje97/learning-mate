@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'learningmate.urls'
-LOGIN_REDIRECT_URL = "/community"
+LOGIN_REDIRECT_URL = "/dailyclass"
 LOGOUT_REDIRECT_URL = "/accounts/login"
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"

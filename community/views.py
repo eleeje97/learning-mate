@@ -12,7 +12,7 @@ from django.db.models import Q
 def notice(request):
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')
-    question_list = Question.objects.order_by('-create_date')
+    question_list = Question.objects.order_by('-create_date').filter(board_type=1)
     if kw:
         question_list = question_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
@@ -25,10 +25,10 @@ def notice(request):
     return render(request, 'notice/question_list.html', context)
 
 
-def information (request):
+def information(request):
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')
-    question_list = Question.objects.order_by('-create_date')
+    question_list = Question.objects.order_by('-create_date').filter(board_type=2)
     if kw:
         question_list = question_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
@@ -38,13 +38,13 @@ def information (request):
     paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
     context = {'question_list': page_obj, 'page': page, 'kw': kw}
-    return render(request, 'infomation/question_list.html', context)
+    return render(request, 'information/question_list.html', context)
 
 
 def chat(request):
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')
-    question_list = Question.objects.order_by('-create_date')
+    question_list = Question.objects.order_by('-create_date').filter(board_type=3)
     if kw:
         question_list = question_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
@@ -79,6 +79,42 @@ def answer_create(request, question_id):
         return HttpResponseNotAllowed('Only POST is possible.')
     context = {'question': question, 'form': form}
     return render(request, 'community/question_detail.html', context)
+
+
+@login_required(login_url='accounts:login')
+def notice_create(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.user = request.user
+            question.create_date = timezone.now()
+            question.board_type = request.POST['board_type']
+            question.save()
+            return redirect('community:notice')
+    else:
+        form = QuestionForm()
+    context = {'form': form}
+    return render(request, 'notice/question_form.html', context)
+
+
+@login_required(login_url='accounts:login')
+def information_create(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.user = request.user
+            question.create_date = timezone.now()
+            question.board_type = request.POST['board_type']
+            question.save()
+            return redirect('community:information')
+    else:
+        form = QuestionForm()
+    context = {'form': form}
+    return render(request, 'information/question_form.html', context)
 
 
 @login_required(login_url='accounts:login')
@@ -126,6 +162,26 @@ def question_delete(request, question_id):
         return redirect('community:detail', question_id=question.id)
     question.delete()
     return redirect('community:chat')
+
+
+@login_required(login_url='accounts:login')
+def information_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user != question.user:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('community:detail', question_id=question.id)
+    question.delete()
+    return redirect('community:information')
+
+
+@login_required(login_url='accounts:login')
+def notice_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user != question.user:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('community:detail', question_id=question.id)
+    question.delete()
+    return redirect('community:notice')
 
 
 @login_required(login_url='accounts:login')

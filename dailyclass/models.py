@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 from accounts.models import User
@@ -14,6 +16,9 @@ class QnA(models.Model):
     def __str__(self):
         return f'[{self.pk}] {self.qna_question}'
 
+    def get_absolute_url(self):
+        return f'/dailyclass/question/{self.qna_id}'
+
 
 class QnA_answer(models.Model):
     answer_id = models.BigAutoField(primary_key=True)
@@ -27,4 +32,8 @@ class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     file_url = models.FileField('uploaded_file', upload_to='class_material/')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
-    comment = models.CharField(max_length=500)
+    comment = models.CharField(max_length=500, null=True, blank=True)
+    # file_type = models.CharField(max_length=100)
+
+    def get_filename(self):
+        return os.path.basename(self.file_url.name)
