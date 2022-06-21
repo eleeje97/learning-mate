@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question Form</title>
+    <title>질문있어요! - 질문 작성 페이지</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -57,23 +57,11 @@
                                 {% csrf_token %}
                                 {{form.media}}
                                 {{form.as_p}}
-                                <div class="form-body">
-                                    <div class="row">
-                                        <div id="full">
-                                            <div class="mb-3">
-                                            {{ qna.qna_queston|safe }}
-
-                                            <p>이 메세지를 지우고 여기에 질문을 작성하시면 됩니다</p>
-                                            <p><br></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit"
-                                            class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset"
-                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                        </div>
-                                    </div>
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit"
+                                    class="btn btn-primary me-1 mb-1">Submit</button>
+                                <button type="reset"
+                                    class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                 </div>
                             </form>
                         </div>

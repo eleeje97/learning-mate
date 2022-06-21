@@ -8,6 +8,7 @@ from accounts.models import User
 class QnA(models.Model):
     qna_id = models.BigAutoField(primary_key=True)
     qna_question = RichTextUploadingField(blank=True, null=True)
+    qna_question_tag = models.CharField(max_length=50, default="others")
     #qna_question = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     img_path = models.TextField(null=True)  # img가 없을수도 있으므로 null=True
