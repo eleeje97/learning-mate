@@ -53,8 +53,12 @@
                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="user-menu d-flex">
                         <div class="user-name text-end me-3">
-                            <h6 class="mb-0 text-gray-600">John Ducky</h6>
-                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                            <h6 class="mb-0 text-gray-600">{{user}}</h6>
+                            {% if user.user_type == 0 %}
+                            <p class="mb-0 text-sm text-gray-600">학생</p>
+                            {% else %}
+                            <p class="mb-0 text-sm text-gray-600">강사</p>
+                            {% endif %}
                         </div>
                         <div class="user-img d-flex align-items-center">
                             <div class="avatar avatar-md">
@@ -65,7 +69,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                     <li>
-                        <h6 class="dropdown-header">Hello, John!</h6>
+                        <h6 class="dropdown-header">Hello, {{user}}!</h6>
                     </li>
                     <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
                             Profile</a></li>
@@ -83,3 +87,24 @@
         </div>
     </div>
 </nav>
+
+
+<!-- 날짜 선택 -->
+<div id="main-content">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h5>날짜 선택</h5>
+            <input class="form-control" id="date" type="date" max="9999-12-31">
+        </div>
+    </div>
+</div>
+
+<script>
+    date_input = document.getElementById('date');
+    date_input.valueAsDate = new Date();
+    console.log(date_input.value);
+
+    date_input.addEventListener('blur', function(e){
+        console.log(date_input.value);
+    }, false);
+</script>

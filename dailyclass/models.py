@@ -1,20 +1,22 @@
 import os
 
 from django.db import models
-
+from ckeditor_uploader.fields import RichTextUploadingField
 from accounts.models import User
 
 
 class QnA(models.Model):
     qna_id = models.BigAutoField(primary_key=True)
-    qna_question = models.TextField()
+    qna_question = RichTextUploadingField(blank=True, null=True)
+    qna_question_tag = models.CharField(max_length=50, default="others")
+    #qna_question = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     img_path = models.TextField(null=True)  # img가 없을수도 있으므로 null=True
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     # on_delete=models.CASCADE의 의미는 이 유저의 계정이 삭제될 경우 질문도 함께 삭제된다는 의미
 
     def __str__(self):
-        return f'[{self.pk}] {self.qna_question}'
+        return f'[{self.qna_id}] {self.qna_question}'
 
     def get_absolute_url(self):
         return f'/dailyclass/question/{self.qna_id}'
@@ -51,7 +53,8 @@ class ClassMaterial(models.Model):
     file_url = models.FileField('uploaded_file', upload_to='class_material/')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     comment = models.CharField(max_length=500, null=True, blank=True)
-    # file_type = models.CharField(max_length=100)
+    file_type = models.CharField(max_length=100)
+    file_name = models.CharField(max_length=100)
 
     def get_filename(self):
         return os.path.basename(self.file_url.name)

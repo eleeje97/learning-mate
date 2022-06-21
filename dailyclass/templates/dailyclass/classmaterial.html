@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_tags %}
 <html lang="en">
 
 <head>
@@ -99,7 +100,7 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>2022년 06월 21일 학습자료</h3>
+                                <h3>학습자료 목록</h3>
                             </div>
                         </div>
                     </div>
@@ -111,34 +112,25 @@
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <h4 class="card-title">{{file.get_filename}}</h4>
+                                            <h4 class="card-title">{{file.file_name}}</h4>
                                             <p class="card-text">
                                                 {{file.comment}}
                                             </p>
                                         </div>
-                                        <img class="img-fluid w-100" src="{% static 'images/ppt.jpg' %}"
+
+                                        <img class="img-fluid w-100" src="{% static file.file_name|getFileExtension|getImgUrl %}"
                                             alt="Card image cap">
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
                                         <span><i class="bi bi-person"></i> {{file.user_id}}</span>
 
-<!--                                        action="{% url 'dailyclass:download' file_id=file.id %}"-->
-<!--                                        <form method="post" id="file_download_delete_form">-->
-<!--                                            {% csrf_token %}-->
-<!--                                            <input type="hidden" id="file_id" value="{{file.id}}">-->
-<!--                                            <button class="btn btn-light-primary" type="submit" onclick="downloadOrDeleteFile('download')" id="download">다운로드</button>-->
-<!--                                            <button class="btn btn-light-primary" type="submit" onclick="downloadOrDeleteFile('delete')" id="delete">삭제</button>-->
-<!--                                        </form>-->
+                                        <div>
+                                            <button class="btn btn-light-primary" onclick="location.href='{% url 'dailyclass:download' file_id=file.id %}'">다운로드</button>
+                                            {% if user == file.user_id %}
+                                            <button class="btn btn-light-primary" onclick="location.href='{% url 'dailyclass:delete' file_id=file.id %}'">삭제</button>
+                                            {% endif %}
+                                        </div>
 
-                                        <form action="{% url 'dailyclass:download' file_id=file.id %}">
-                                            <button class="btn btn-light-primary" type="submit">다운로드</button>
-                                        </form>
-
-                                        {% if user == file.user_id %}
-                                        <form action="{% url 'dailyclass:delete' file_id=file.id %}">
-                                            <button class="btn btn-light-primary" type="submit">삭제</button>
-                                        </form>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -165,24 +157,6 @@
         </div>
     </div>
 
-
-    <script>
-        let file_id = document.getElementById("file_id")
-        let form = document.getElementById("file_download_delete_form")
-        console.log(file_id.value)
-
-        function downloadOrDeleteFile(mode) {
-            if (mode == "download") {
-                form.action = "":
-                console.log("download!");
-            } else {
-                form.action = "";
-                console.log("delete!!!");
-            }
-            form.submit();
-        }
-
-    </script>
 
     <script src="{% static 'assets/js/main.js' %}"></script>
 

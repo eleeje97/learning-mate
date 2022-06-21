@@ -7,8 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
-from django.core.paginator import Paginator
-
+from django.views.generic import ListView, DetailView, CreateView
 
 
 from .forms import QuestionForm
@@ -18,8 +17,8 @@ from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
 # 학습자료 공유
 def classmaterial(request):
     upload_file(request)
-    file_list, file_names = fileList(request)
-    return render(request, 'dailyclass/classmaterial.html', {'file_list': file_list, 'file_names': file_names})
+    file_list = fileList(request)
+    return render(request, 'dailyclass/classmaterial.html', {'file_list': file_list})
 
 
 def upload_file(request):
@@ -29,9 +28,7 @@ def upload_file(request):
         print(request.user)
         print(request.POST['comment'])
         if request.FILES:
-            # material = ClassMaterial(comment=request.POST['comment'], file_name=str(request.FILES['uploaded_file']), file_url=request.FILES['uploaded_file'], user_id=request.user)
-            material = ClassMaterial(comment=request.POST['comment'],
-                                     file_url=request.FILES['uploaded_file'], user_id=request.user)
+            material = ClassMaterial(comment=request.POST['comment'], file_name=str(request.FILES['uploaded_file']), file_type=request.FILES['uploaded_file'].content_type, file_url=request.FILES['uploaded_file'], user_id=request.user)
             print('파일:', request.FILES['uploaded_file'])
             print(material)
             print(request.FILES['uploaded_file'].content_type)
@@ -40,10 +37,7 @@ def upload_file(request):
 
 def fileList(request):
     file_list = ClassMaterial.objects.all()
-    file_names = []
-    for i in file_list:
-        file_names.append(i.get_filename())
-    return file_list, file_names
+    return file_list
 
 
 class FileDownloadView(SingleObjectMixin, View):
@@ -53,9 +47,9 @@ class FileDownloadView(SingleObjectMixin, View):
         object = self.get_object(file_id)
 
         file_path = object.file_url.path
-        # file_type = object.content_type  # django file object에 content type 속성이 없어서 따로 저장한 필드
+        file_type = object.file_type
         fs = FileSystemStorage(file_path)
-        response = FileResponse(fs.open(file_path, 'rb')) #content_type=file_type
+        response = FileResponse(fs.open(file_path, 'rb'), content_type=file_type)
         response['Content-Disposition'] = f'attachment; filename={object.get_filename()}'
 
         return response
@@ -92,22 +86,24 @@ def test_view(request):
     return render(request, 'dailyclass/test.html',)
 
 
-def question_list(request):
-    questions = QnA.objects.all().order_by('-pk')
-
-    return render(request,
-                  'dailyclass/question_list.html',
-                  {
-                      'questions':questions,
-                  })
+class question_list(ListView):
+    model = QnA
+    template_name = 'dailyclass/question_list.html'
 
 
-def single_question_page(request, qna_id):
-    question = QnA.objects.get(qna_id=qna_id)
 
-    return render(request,'dailyclass/question/single_question_page.html',
-                  {'question':question,})
+class single_question_page(DetailView):
+    model = QnA
+    template_name = 'dailyclass/question/single_question_page.html'
 
+    def get_object(self, queryset=None):
+        object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
+        return object
+
+class AddQuestionView(CreateView):
+    model = QnA
+    template_name = 'dailyclass/question_form.html'
+    fields = '__all__'
 
 def question_create(request):
     if request.method == 'POST':
