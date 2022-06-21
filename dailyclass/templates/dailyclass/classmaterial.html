@@ -124,24 +124,12 @@
                                     <div class="card-footer d-flex justify-content-between">
                                         <span><i class="bi bi-person"></i> {{file.user_id}}</span>
 
-
-<!--                                        <form method="post" action="{% url 'dailyclass:download' file_id=file.id %}">-->
-<!--                                            {% csrf_token %}-->
-<!--                                            <button class="btn btn-light-primary" type="submit" onclick="downloadOrDeleteFile('download')" id="download">다운로드</button>-->
-<!--                                            <button class="btn btn-light-primary" type="submit" onclick="downloadOrDeleteFile('delete')" id="delete">삭제</button>-->
-<!--                                        </form>-->
-
-
-
-                                            <form action="{% url 'dailyclass:download' file_id=file.id %}">
-                                                <button class="btn btn-light-primary" type="submit">다운로드</button>
-                                            </form>
-
+                                        <div>
+                                            <button class="btn btn-light-primary" onclick="location.href='{% url 'dailyclass:download' file_id=file.id %}'">다운로드</button>
                                             {% if user == file.user_id %}
-                                            <form action="{% url 'dailyclass:delete' file_id=file.id %}">
-                                                <button class="btn btn-light-primary" type="submit">삭제</button>
-                                            </form>
+                                            <button class="btn btn-light-primary" onclick="location.href='{% url 'dailyclass:delete' file_id=file.id %}'">삭제</button>
                                             {% endif %}
+                                        </div>
 
                                     </div>
                                 </div>
