@@ -19,18 +19,14 @@ class QnA_answer(models.Model):
     qna_answer = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
-
-class Post(models.Model):
-    # user_id =
-    # file_url =
-
-    title = models.CharField(max_length=30)
+class Quiz(models.Model):
+    quiz_id = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=50)
+    quiz_question = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
-    content = models.TextField()
 
-    def __str__(self):
-        return f'[{self.pk}]{self.title}'
-
-# class Bookmark(models.Model):
-#     title = models.CharField(max_length=200)
-#     url = models.URLField(verbose_name='Site URL')
+class QuizAnswer(models.Model):
+    quiz_id = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=50)
+    quiz_answer = models.CharField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True)
