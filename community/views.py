@@ -6,14 +6,54 @@ from django.http import HttpResponseNotAllowed
 from .forms import QuestionForm, AnswerForm
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.db.models import Q
 
 
-def index(request):
+def notice(request):
     page = request.GET.get('page', '1')  # 페이지
-    question_list = Question.objects.order_by('-create_date')
+    kw = request.GET.get('kw', '')
+    question_list = Question.objects.order_by('-create_date').filter(board_type=1)
+    if kw:
+        question_list = question_list.filter(
+            Q(subject__icontains=kw) |  # 제목 검색
+            Q(content__icontains=kw) |  # 내용 검색
+            Q(answer__content__icontains=kw)  # 답변 검색
+        ).distinct()
     paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
-    context = {'question_list': page_obj}
+    context = {'question_list': page_obj, 'page': page, 'kw': kw}
+    return render(request, 'notice/question_list.html', context)
+
+
+def information(request):
+    page = request.GET.get('page', '1')  # 페이지
+    kw = request.GET.get('kw', '')
+    question_list = Question.objects.order_by('-create_date').filter(board_type=2)
+    if kw:
+        question_list = question_list.filter(
+            Q(subject__icontains=kw) |  # 제목 검색
+            Q(content__icontains=kw) |  # 내용 검색
+            Q(answer__content__icontains=kw)  # 답변 검색
+        ).distinct()
+    paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+    context = {'question_list': page_obj, 'page': page, 'kw': kw}
+    return render(request, 'information/question_list.html', context)
+
+
+def chat(request):
+    page = request.GET.get('page', '1')  # 페이지
+    kw = request.GET.get('kw', '')
+    question_list = Question.objects.order_by('-create_date').filter(board_type=3)
+    if kw:
+        question_list = question_list.filter(
+            Q(subject__icontains=kw) |  # 제목 검색
+            Q(content__icontains=kw) |  # 내용 검색
+            Q(answer__content__icontains=kw)  # 답변 검색
+        ).distinct()
+    paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+    context = {'question_list': page_obj, 'page': page, 'kw': kw}
     return render(request, 'community/question_list.html', context)
 
 
@@ -21,6 +61,7 @@ def detail(request, question_id):
     question = Question.objects.get(id=question_id)
     context = {'question': question}
     return render(request, 'community/question_detail.html', context)
+
 
 @login_required(login_url='accounts:login')
 def answer_create(request, question_id):
@@ -39,16 +80,55 @@ def answer_create(request, question_id):
     context = {'question': question, 'form': form}
     return render(request, 'community/question_detail.html', context)
 
+
 @login_required(login_url='accounts:login')
-def question_create(request):
+def notice_create(request):
     if request.method == 'POST':
+        print(request.POST)
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
             question.user = request.user
             question.create_date = timezone.now()
+            question.board_type = request.POST['board_type']
             question.save()
-            return redirect('community:index')
+            return redirect('community:notice')
+    else:
+        form = QuestionForm()
+    context = {'form': form}
+    return render(request, 'notice/question_form.html', context)
+
+
+@login_required(login_url='accounts:login')
+def information_create(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.user = request.user
+            question.create_date = timezone.now()
+            question.board_type = request.POST['board_type']
+            question.save()
+            return redirect('community:information')
+    else:
+        form = QuestionForm()
+    context = {'form': form}
+    return render(request, 'information/question_form.html', context)
+
+
+@login_required(login_url='accounts:login')
+def question_create(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.user = request.user
+            question.create_date = timezone.now()
+            question.board_type = request.POST['board_type']
+            question.save()
+            return redirect('community:chat')
     else:
         form = QuestionForm()
     context = {'form': form}
@@ -81,7 +161,27 @@ def question_delete(request, question_id):
         messages.error(request, '삭제권한이 없습니다')
         return redirect('community:detail', question_id=question.id)
     question.delete()
-    return redirect('community:index')
+    return redirect('community:chat')
+
+
+@login_required(login_url='accounts:login')
+def information_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user != question.user:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('community:detail', question_id=question.id)
+    question.delete()
+    return redirect('community:information')
+
+
+@login_required(login_url='accounts:login')
+def notice_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user != question.user:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('community:detail', question_id=question.id)
+    question.delete()
+    return redirect('community:notice')
 
 
 @login_required(login_url='accounts:login')
@@ -101,6 +201,7 @@ def answer_modify(request, answer_id):
         form = AnswerForm(instance=answer)
     context = {'answer': answer, 'form': form}
     return render(request, 'community/answer_form.html', context)
+
 
 @login_required(login_url='accounts:login')
 def answer_delete(request, answer_id):

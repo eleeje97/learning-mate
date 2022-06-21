@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Form</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.bubble.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.snow.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+
+</head>
+
+<body>
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
     <form method="post">
@@ -18,7 +40,7 @@
         </div>
         {% endif %}
         <!-- 오류표시 End -->
-        <div class="mb-3">
+         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
                    value="{{ form.subject.value|default_if_none:'' }}">
@@ -28,8 +50,39 @@
             <textarea class="form-control" name="content"
                       id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
         </div>
-        
+
+        <input type="hidden" value="3" name="board_type">
+
         <button type="submit" class="btn btn-primary">저장하기</button>
+
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+        <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
+        <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>
+        <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
+
+
+        <script src="{% static 'assets/js/main.js' %}"></script>
+
+
     </form>
+    <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2022 &copy; Mazer</p>
+                    </div>
+                    <div class="float-end">
+                        <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
+                    </div>
+                </div>
+            </footer>
 </div>
+</body>
+</html>
+{% endblock %}
+
+
+
+{% block script %}
+
 {% endblock %}
