@@ -65,11 +65,13 @@
 
                     <script>
                         date_input = document.getElementById('date');
-                        date_input.valueAsDate = new Date();
+                        console.log("날:::{{date|safe}}");
+                        date_input.value = "{{date|safe}}";
                         console.log(date_input.value);
 
-                        date_input.addEventListener('blur', function(e){
+                        date_input.addEventListener('change', function(e){
                             console.log(date_input.value);
+                            window.location.href= "/dailyclass/classmaterial?date=" + date_input.value;
                         }, false);
                     </script>
 

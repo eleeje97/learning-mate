@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.conf import settings
@@ -16,9 +17,15 @@ from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
 
 # 학습자료 공유
 def classmaterial(request):
+    if request.GET.get('date') is None:
+        date = datetime.datetime.now().date()
+    else:
+        date = datetime.datetime.strptime(request.GET.get('date'), "%Y-%m-%d").date()
+
     upload_file(request)
-    file_list = fileList(request)
-    return render(request, 'dailyclass/classmaterial.html', {'file_list': file_list})
+    file_list = fileList(request, date)
+
+    return render(request, 'dailyclass/classmaterial.html', {'file_list': file_list, 'date': date})
 
 
 def upload_file(request):
@@ -35,8 +42,9 @@ def upload_file(request):
             material.save()
 
 
-def fileList(request):
-    file_list = ClassMaterial.objects.all()
+def fileList(request, date):
+    # file_list = ClassMaterial.objects.all()
+    file_list = ClassMaterial.objects.filter(date__range=[date, date + datetime.timedelta(days=1)])
     return file_list
 
 
