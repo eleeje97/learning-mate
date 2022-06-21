@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import ListView, DetailView
 
 from .forms import QuestionForm
 from .models import QnA, QnA_answer, ClassMaterial, Quiz
@@ -91,21 +92,19 @@ def test_view(request):
     return render(request, 'dailyclass/test.html',)
 
 
-def question_list(request):
-    questions = QnA.objects.all().order_by('-pk')
-
-    return render(request,
-                  'dailyclass/question_list.html',
-                  {
-                      'questions':questions,
-                  })
+class question_list(ListView):
+    model = QnA
+    template_name = 'dailyclass/question_list.html'
 
 
-def single_question_page(request, qna_id):
-    question = QnA.objects.get(qna_id=qna_id)
+class single_question_page(DetailView):
+    model = QnA
+    template_name = 'dailyclass/question/single_question_page.html'
 
-    return render(request,'dailyclass/question/single_question_page.html',
-                  {'question':question,})
+    def get_object(self, queryset=None):
+        object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
+        return object
+
 
 
 def question_create(request):

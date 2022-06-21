@@ -1,16 +1,68 @@
 <!DOCTYPE html>
-<html lang="ko">
+{% load static %}
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Question List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Form</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.bubble.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.snow.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+
 </head>
+
 <body>
-    <h1>Question List</h1>
-{% for q in questions %}
-    <hr/>
-    <h3><a href="{{ q.get_absolute_url }}">{{ q.qna_question }}</a></h3>
-    <h4>{{ q.date }}</h4>
-    <p>{{ q.user_id }}</p>
-{% endfor %}
+    <div id="app">
+        {% include 'dailyclass_sidebar.html' %}
+        <div id="main" class='layout-navbar'>
+            <header class='mb-3'>
+                {% include 'dailyclass_navbar.html' %}
+            </header>
+            <div id="main-content">
+
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>질문</th>
+                            <th>게시일시</th>
+                            <th>작성자</th>
+                            <th>답변등록여부</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for q in object_list %}
+                        <tr>
+                            <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question }}</a></td>
+                            <td>{{ q.date }}</td>
+                            <td>{{ q.user_id }}</td>
+                            <td>
+                                <span class="badge bg-success">Active</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
+    <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
 </body>
+
 </html>
