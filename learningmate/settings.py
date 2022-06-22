@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import lmate_settings
@@ -27,7 +26,9 @@ SECRET_KEY = lmate_settings.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    ".ap-northeast-2.compute.amazonaws.com"
+]
 
 # Application definition
 
