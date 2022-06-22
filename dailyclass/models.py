@@ -67,7 +67,25 @@ class result(models.Model):
     answer_num = models.IntegerField()
     checking = models.BooleanField()
 
+#여기서 새로 만들 테이블
+class Question2(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=200)
+    content = models.TextField()
+    create_date = models.DateTimeField()
+    modify_date = models.DateTimeField(null=True, blank=True)
+    board_type = models.CharField(max_length=6)
 
+    def __str__(self):
+        return self.subject
+
+
+class Answer2(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question2, on_delete=models.CASCADE)
+    content = models.TextField()
+    create_date = models.DateTimeField()
+    modify_date = models.DateTimeField(null=True, blank=True)
 
 class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)
