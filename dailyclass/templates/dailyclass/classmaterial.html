@@ -88,7 +88,7 @@
 
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlTextarea1" class="form-label">업로드 할 학습자료에 대해 설명해주세요.</label>
-                                            <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                            <textarea style="box-shadow: 0px 0px 4px 3px lightgrey;" class="form-control" name="comment" id="exampleFormControlTextarea1" rows="2"></textarea>
                                         </div>
 
 
@@ -145,7 +145,7 @@
                                             alt="Card image cap">
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
-                                        <span><i class="bi bi-person"></i> {{file.user_id}}</span>
+                                        <span><i class="icon-mid bi bi-person"></i> {{file.user_id}}</span>
 
                                         <div>
                                             <button class="btn btn-light-primary" onclick="location.href='{% url 'dailyclass:download' file_id=file.id %}'">다운로드</button>
