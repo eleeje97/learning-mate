@@ -85,20 +85,20 @@ def quiz_home(request):
     return render(request, 'dailyclass/quiz/quiz_home.html')
 
 def quiz(request):
-    quiz = Quiz.objects.filter(quiz_id=request.POST['quiz_id'])
-    return render(request, 'dailyclass/quiz/quiz.html',{"quiz":quiz})
+    quiz = Quiz.objects.filter(pk=1)#(quiz_id=request.POST['quiz_id'])
+    return render(request, 'dailyclass/quiz/quiz.html')#{"quiz":quiz})
 
 def result(request):
     res = result.object.all()
     return render(request, 'dailyclass/quiz/result.html',) #{"res":res})
 
-# def score(request):
-#     num = 1
-#     if request.POST:
-#         num = int(request.POST['answer_num'])
-#         if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
-#             checklst=[]
-#             checklst += result.checking() #boolean?????
+def score(request):
+    num = 1
+    if request.POST:
+        num = int(request.POST['answer_num'])
+        if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
+            checklst=[]
+            checklst += result.checking() #boolean?????
 
 # 질문있어요!
 def test_view(request):
