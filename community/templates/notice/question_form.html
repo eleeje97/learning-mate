@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">글쓰기</h5>
+    <h5 class="my-3 border-bottom pb-2">공지사항 등록</h5>
 
     <form method="POST">
         {% csrf_token %}
@@ -50,8 +50,8 @@
         <script type="text/javascript" src="/static/js/lang/summernote-ko-KR.js"></script>
     </form>
     <label>
-    {{ form.top_fixed }}
-    <span>상단에 표시하기</span>
+    <input id="selected" type="checkbox" name="selected" value="{{ form.top_fixed }}">
+    <span >상단에 표시하기</span>
     </label>
     <footer>
                 <div class="footer clearfix mb-0 text-muted">

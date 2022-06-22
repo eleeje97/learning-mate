@@ -8,8 +8,7 @@
         <header class='mb-3'>
             {% include 'community_navbar.html' %}
         </header>
-            <div id="main-content">
-
+        <div id="main-content">
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
@@ -53,28 +52,27 @@
                                         </tr>
                                 </thead>
 
-            <tbody>
-                {% if question_list %}
-                {% for question in question_list %}
-                <tr class="text-center">
-                    <td>{{ forloop.counter }}</td>
-                    <td class="text-left">
-                        <a href="{% url 'community:detail' question.id %}">{{ question.subject }}</a>
-                            <!--                    <script type="text/javascript">-->
-                            <!--                        <span>NEW</span>-->
-                            <!--                    </script>-->
-                    </td>
-                    <td>{{ question.user }}</td>
-                    <td>{{ question.create_date }}</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="4">질문이 없습니다.</td>
-                </tr>
-                {% endif %}
-            </tbody>
-        </table>
+
+        <tr class="text-center">
+            <td>{{ forloop.counter }}</td>
+            <td class="text-left">
+                <a href="{% url 'community:notice_detail' question.id %}">{{ question.subject }}</a>
+<!--                    <script type="text/javascript">-->
+<!--                        <span>NEW</span>-->
+<!--                    </script>-->
+            </td>
+            <td>{{ question.user }}</td>
+            <td>{{ question.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="4">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
     <!-- 페이징처리 시작 -->
     <ul class="pagination justify-content-center">
         <!-- 이전페이지 -->
