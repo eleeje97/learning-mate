@@ -30,44 +30,12 @@
 <div class="main_content" align="middle">
     {# for i in questions #}
             <div class="question_in_img"><h4><br><strong>Q : {{quiz.quiz_question}}</strong></h4></div><br>
-            <form class="question_form" method="post" action="{url }">
-                <div class="radio-group">
-                    <div class="each-radio-img">
-                        <label class="labl-img">
-                            <input type="radio" name="answer_num" id="option1" value="1">
-                            {{quiz.option1}}
-                        </label>
-                    </div>
-                    <br>
-                    <div class="each-radio-img">
-                        <label class="labl-img">
-                            <input type="radio" name="answer_num" id="option2" value="2">
-                            {{quiz.option2}}
-                        </label>
-                    </div>
-                    <br>
-                     <div class="each-radio-img">
-                        <label class="labl-img">
-                            <input type="radio" name="answer_num" id="option3" value="3">
-                           {{quiz.option3}}
-                        </label>
-                    </div>
-                    <br>
-                     <div class="each-radio-img">
-                        <label class="labl-img">
-                            <input type="radio" name="answer_num" id="option4" value="4">
-                            {{quiz.option4}}
-                        </label>
-                    </div>
-                </div>
-                <fieldset>
-                    <legend>  </legend>
-                    <br> <input type="submit" value="답안 제출">
-                </fieldset>
-                {# endfor #}
+            <form class="question_form" method="post" action="{% url dailyclass:score  score.id? %}">
+
             </form>
     </div>
   </div>
+</div>
 </div>
 
 {% endblock %}
