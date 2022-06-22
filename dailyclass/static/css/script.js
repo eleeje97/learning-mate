@@ -1,6 +1,6 @@
 window.onload = initall;
 var saveAnsButton;
-var xheckButton;
+var checkButton;
 function initall(){
     saveAnsButton = document.getElementById('save_ans');
     saveAnsButton.onclick = save_ans;
@@ -11,7 +11,13 @@ function save_ans(){
     var url =  '/save_ans?ans='+ans
     var req = new XMLHttpRequest();
     req.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState == 4
+
+
+
+        && this.status == 200) {
+
+
         // alert(req.responseText)
         };
     };
