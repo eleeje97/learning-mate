@@ -60,7 +60,8 @@
                 <a href="{% url 'community:information_detail' question.id %}">{{ question.subject }}</a>
                 {% if question.answer_set.count > 0 %}
                 <span class="text-danger small mx-2">{{ question.answer_set.count }}</span>
-
+                    {% endif %}
+                    </td>
                     <td>{{ question.user }}</td>
                     <td>{{ question.create_date }}</td>
                 </tr>
