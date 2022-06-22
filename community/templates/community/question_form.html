@@ -54,6 +54,8 @@
         <input type="hidden" value="3" name="board_type">
 
         <button type="submit" class="btn btn-primary">저장하기</button>
+        <a href="{% url 'community:chat' %}" class="btn btn-primary">목록</a>
+
 
         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 
@@ -66,7 +68,7 @@
 
 
     </form>
-    <footer>
+     <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2022 &copy; Mazer</p>
@@ -75,9 +77,10 @@
                         <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
                     </div>
                 </div>
-            </footer>
+    </footer>
 </div>
 </body>
+
 </html>
 {% endblock %}
 
