@@ -50,12 +50,23 @@
                     <section class="section">
                     <div class="card">
                         <div class="card-body">
-                            <h4>Question: {{ qna.qna_question }}</h4>
+                            <h4>Question: {{ qna.qna_question|safe }}</h4>
                             <h6>Created at: {{ qna.date }}</h6>
-                            <p>By: {{ qna.user_id }}</p>
+                            <p>By: {{ qna.user_id }}
+
+                            {% if user.is_authenticated %}
+                                {% if user == qna.user_id %}
+                                - <a href="{% url 'dailyclass:question_update_form' qna.pk %}"
+                                    class="badge bg-secondary">수정하기</a>
+                                 <a href="{% url 'dailyclass:delete_question' qna.pk %}"
+                                class="badge bg-secondary">삭제하기</a>
+                                {% endif %}
+                            {% endif %}
+
+                            </p>
 
                             <div class="buttons">
-                                    <a href="{% url 'dailyclass:question_list' %}" class="btn btn-primary rounded-pill">뒤로가기</a>
+                                    <a href="{% url 'dailyclass:question_list' %}" class="btn btn-primary rounded-pill">목록보기</a>
                             </div>
                         </div>
                     </div>

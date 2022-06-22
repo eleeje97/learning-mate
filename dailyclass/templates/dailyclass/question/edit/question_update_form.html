@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>질문있어요! - 질문 작성 페이지</title>
+    <title>질문있어요! - 질문 수정 페이지</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -21,6 +21,8 @@
 
 </head>
 
+
+
 <body>
     <div id="app">
         {% include 'dailyclass_sidebar.html' %}
@@ -29,7 +31,7 @@
                 {% include 'dailyclass_navbar.html' %}
             </header>
             <div id="main-content">
-
+{% if user == qna.user_id %}
                 <div class="page-heading">
                     <div class="page-title">
                         <div class="row">
@@ -40,7 +42,7 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'dailyclass:classmaterial' %}">오늘의 클래스</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">질문있어요!</li>
                                     </ol>
                                 </nav>
@@ -49,37 +51,51 @@
                     </div>
                     <section class="section">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">무엇이 궁금하신가요?</h4>
-                        </div>
+
                         <div class="card-body">
-                            <form class="form form-horizontal" method="POST">
-                                {% csrf_token %}
-                                {{form.media}}
-                                {{form.as_p}}
-                                <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="submit"
-                                    class="btn btn-primary me-1 mb-1">Submit</button>
-                                <button type="reset"
-                                    class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                </div>
-                            </form>
+                                <form class="form form-vertical" method="POST">
+                                        <div class="row">
+                                            {% csrf_token %}
+                                            {{form.media}}
+                                            {{form.as_p}}
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="submit"
+                                                    class="btn btn-primary me-1 mb-1">수정 완료</button>
+                                                <a href="{% url 'dailyclass:question_list' %}"
+                                                    class="btn btn-light-secondary me-1 mb-1">작성 취소</a>
+                                            </div>
+                                        </div>
+                                </form>
                         </div>
                     </div>
-                </section>
+                    </section>
                 </div>
 
                 <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2021 &copy; Mazer</p>
+                        </div>
+                        <div class="float-end">
+                            <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
+                        </div>
                     </div>
-                    <div class="float-end">
-                        <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
-                    </div>
-                </div>
                 </footer>
             </div>
+            {% else %}
+            <div id="error">
+                <div class="error-page container">
+                    <div class="col-md-8 col-12 offset-md-2">
+                        <img class="img-error img-fluid" src="{% static 'assets/images/samples/error-403.png' %}" alt="Not Found">
+                        <div class="text-center">
+                            <h1 class="error-title">Forbidden</h1>
+                            <p class="fs-5 text-gray-600">이 페이지를 볼 권한이 없습니다.</p>
+                            <a href="/dailyclass/classmaterial" class="btn btn-lg btn-outline-primary mt-3">Go Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
     <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>

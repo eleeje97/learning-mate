@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <h5 class="my-3 border-bottom pb-2">공지사항 등록</h5>
 
     <form method="POST">
         {% csrf_token %}
@@ -34,6 +34,7 @@
         <input type="hidden" value="1" name="board_type">
 
         <button type="submit" class="btn btn-primary">저장하기</button>
+        <a href="{% url 'community:notice' %}" class="btn btn-primary">목록</a>
 
         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 

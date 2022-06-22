@@ -8,6 +8,7 @@ def getFileExtension(value):
 
 
 def getImgUrl(extension):
+    extension = extension.lower()
     if extension in ('doc', 'docx', 'docm'):
         return "images/docx.png"
     elif extension in ('xls', 'xlsx', 'xlsm', 'xlsb', 'xltm', 'xlam', 'xltx'):

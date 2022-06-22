@@ -1,7 +1,10 @@
 from django.urls import path, include
 from . import views
 
-from .views import FileDownloadView, question_list, single_question_page, AddQuestionView
+from .views import FileDownloadView, question_list, single_question_page, AddQuestionView, UpdateQuestionView, DeleteQuestionView
+from django.contrib.auth.decorators import login_required, permission_required
+from django.views.generic import TemplateView
+
 
 app_name = 'dailyclass'
 
@@ -14,10 +17,11 @@ urlpatterns=[
 
     path('test/', views.test_view),
     path('question_list/', question_list.as_view(), name='question_list'),
-    path('question/<int:qna_id>/', single_question_page.as_view(), name='single_question_page'),
-    path('question_form/', AddQuestionView.as_view(), name="question_form"),
+    path('question/<int:pk>/', single_question_page.as_view(), name='single_question_page'),
+    path('question/question_form/', login_required(AddQuestionView.as_view()), name="question_form"),
+    path('question/edit/<int:pk>', login_required(UpdateQuestionView.as_view()), name='question_update_form'),
+    path('question/edit/<int:pk>/remove', login_required(DeleteQuestionView.as_view()), name='delete_question'),
 
-    path('question/create/', views.question_create, name='question_create'),
     path('quizhome/',views.quiz_home, name='quiz_home'),
     path('quiz/', views.quiz, name='quiz'),
     path('quiz2/', views.quiz, name='quiz'),

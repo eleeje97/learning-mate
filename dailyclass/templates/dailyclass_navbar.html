@@ -13,6 +13,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" href="/dailyclass/classmaterial"
                        aria-selected="undefined">오늘의 클래스</a>
@@ -49,12 +50,14 @@
                     </ul>
                 </li>
             </ul>
+
             <div class="dropdown">
+                {% if user.is_authenticated %}
                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="user-menu d-flex">
                         <div class="user-name text-end me-3">
                             <h6 class="mb-0 text-gray-600">{{user}}</h6>
-                            {% if user.user_type == 0 %}
+                            {% if user.user_type == '0' %}
                             <p class="mb-0 text-sm text-gray-600">학생</p>
                             {% else %}
                             <p class="mb-0 text-sm text-gray-600">강사</p>
@@ -80,31 +83,19 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><i
-                                class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">
+                            <i class="icon-mid bi bi-box-arrow-left me-2"></i>Logout
+                        </a>
+                    </li>
                 </ul>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'accounts:login' %}">
+                    <i class="icon-mid bi bi-box-arrow-in-right me-2"></i>Login
+                </a>
+                {% endif %}
             </div>
         </div>
     </div>
 </nav>
 
-
-<!-- 날짜 선택 -->
-<div id="main-content">
-    <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
-            <h5>날짜 선택</h5>
-            <input class="form-control" id="date" type="date" max="9999-12-31">
-        </div>
-    </div>
-</div>
-
-<script>
-    date_input = document.getElementById('date');
-    date_input.valueAsDate = new Date();
-    console.log(date_input.value);
-
-    date_input.addEventListener('blur', function(e){
-        console.log(date_input.value);
-    }, false);
-</script>
