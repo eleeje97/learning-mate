@@ -39,8 +39,8 @@
                                                 <button class="btn btn-secondary" type="button" id="btn_search"><i class="icon-mid bi bi-search"></i></button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                     </div>
+                            </div>
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
@@ -118,7 +118,10 @@
     {% if user.user_type == '1' %}
     <a href="{% url 'community:notice_create' %}" class="btn btn-primary">글쓰기</a>
     {% endif %}
-<footer>
+</div>
+                    </div>
+                </section>
+            <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2022 &copy; Mazer</p>
@@ -127,7 +130,11 @@
                         <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
                     </div>
                 </div>
-     </footer>
+            </footer>
+            </div>
+        </div>
+        </div>
+    </div>
  <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 
