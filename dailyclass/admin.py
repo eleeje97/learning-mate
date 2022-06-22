@@ -6,3 +6,4 @@ admin.site.register(QnA_answer)
 admin.site.register(Quiz)
 admin.site.register(result)
 
+

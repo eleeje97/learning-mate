@@ -41,13 +41,13 @@ class QnA(models.Model):
 
 class QnA_answer(models.Model):
     answer_id = models.BigAutoField(primary_key=True)
-    qna_id = models.ForeignKey(QnA, related_name="answers", on_delete=models.CASCADE, db_column='qna_id')
+    qna = models.ForeignKey(QnA, related_name="answers", on_delete=models.CASCADE, db_column='qna')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     qna_answer = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s - %s' % (self.qna_id, self.user_id)
+        return f'{self.user_id}::{self.qna_answer}'
 
 
 class Quiz(models.Model):

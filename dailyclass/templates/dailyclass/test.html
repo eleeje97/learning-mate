@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/widgets/chat.css' %}">
 
     <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.bubble.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.snow.css' %}">
@@ -39,7 +40,7 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'dailyclass:classmaterial' %}">오늘의 클래스</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">질문있어요!</li>
                                     </ol>
                                 </nav>
@@ -49,28 +50,93 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{{ qna.qna_question|striptags|truncatechars:50 }}</h4>
+                                <h4 class="card-title">요약: {{ qna.qna_question|striptags|truncatechars:50 }}</h4>
                             </div>
                             <div class="card-body">
-                                <p>Question: {{ qna.qna_question|safe }}</p>
+                                <p>{{ qna.qna_question|safe }}</p>
                                 <hr><p></p>
-                                <p>Created at: {{ qna.date }}</p>
-                                <p>By: {{ qna.user_id }}
+                                <p>작성일: {{ qna.date }}</p>
+                                <p>작성자: {{ qna.user_id }}
 
                                 {% if user.is_authenticated %}
                                     {% if user == qna.user_id %}
-                                    - <a href="{% url 'dailyclass:question_update_form' qna.pk %}"
+                                    &nbsp; &nbsp;
+                                    <a href="{% url 'dailyclass:question_update_form' qna.pk %}"
                                         class="badge bg-secondary">수정하기</a>
-                                     <a href="{% url 'dailyclass:delete_question' qna.pk %}"
+                                    <a href="{% url 'dailyclass:delete_question' qna.pk %}"
                                     class="badge bg-secondary">삭제하기</a>
                                     {% endif %}
                                 {% endif %}
 
                                 </p>
+
+                                <div class="buttons">
+                                    <a href="{% url 'dailyclass:question_list' %}" class="btn btn-primary rounded-pill">목록보기</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body pt-4 bg-grey">
+                                <div class="chat-content">
+
+                                    <br><br>
+                                    <h4>답변...</h4>
+
+                                    {% if not qna.answers.all %}
+                                        No Comments Yet...<a href="#">
+                                        Add One</a>
+                                    {% else %}
+                                        {% for answer in qna.answers.all %}
+                                            <div class="chat chat-left">
+                                                <div class="chat-body">
+                                                    <div class="chat-message">
+                                                        <p>{{ answer.qna_answer }}</p>
+                                                        <p>{{ answer.user_id }} - {{ answer.date }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <div class="chat">
+                                        <div class="chat-body">
+                                            <div class="chat-message">Hi Alfy, how can i help you?</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat chat-left">
+                                        <div class="chat-body">
+                                            <div class="chat-message">
+                                                <p>{{ answer.qna_answer }}</p>
+                                                <p>{{ answer.user_id }} - {{ answer.date }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat">
+                                        <div class="chat-body">
+                                            <div class="chat-message">I recommend you to use Mazer Dashboard</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat chat-left">
+                                        <div class="chat-body">
+                                            <div class="chat-message">That"s great! I like it so much :)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="message-form d-flex flex-direction-column align-items-center">
+                                    <a href="http://" class="black"><i data-feather="smile"></i></a>
+                                    <div class="d-flex flex-grow-1 ml-4">
+                                        <input type="text" class="form-control" placeholder="Type your message..">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <footer>
                 <div class="footer clearfix mb-0 text-muted">
