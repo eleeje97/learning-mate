@@ -1,6 +1,7 @@
 import datetime
 import os
 
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.http import FileResponse
@@ -8,10 +9,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
-from .forms import QuestionForm
+from .forms import QuestionForm, EditForm
 
 
 
@@ -86,10 +88,6 @@ def result(request):
     return render(request, 'dailyclass/quiz/result.html', {"res":res})
 
 # 질문있어요!
-def question_form(request):
-    return render(request, 'dailyclass/question_form.html',)
-
-  
 def test_view(request):
     return render(request, 'dailyclass/test.html',)
 
@@ -109,6 +107,8 @@ class single_question_page(DetailView):
     #     object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
     #     return object
 
+
+
 class AddQuestionView(CreateView):
     model = QnA
     form_class = QuestionForm
@@ -116,7 +116,19 @@ class AddQuestionView(CreateView):
     # fields = '__all__'
     # fields = ('qna_question', 'qna_question_tag')
 
+
+
+
+
 class UpdateQuestionView(UpdateView):
     model = QnA
+    form_class = EditForm
     template_name = 'dailyclass/question/edit/question_update_form.html'
-    fields = ['qna_question', 'qna_question_tag']
+    # fields = ['qna_question', 'qna_question_tag']
+
+
+
+class DeleteQuestionView(DeleteView):
+    model = QnA
+    template_name = 'dailyclass/question/edit/delete_question.html'
+    success_url = reverse_lazy('dailyclass:question_list')

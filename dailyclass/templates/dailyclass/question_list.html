@@ -50,37 +50,56 @@
                     <section class="section">
                     <div class="card">
                         <div class="card-header">
+                            {% if user.is_authenticated %}
                             <div class="buttons">
                                 <a href="{% url 'dailyclass:question_form' %}" class="btn btn-lg btn-outline-primary rounded-pill">+ 질문하기</a>
                             </div>
+                            {% else %}
+                            <div class="alert alert-light-warning color-warning">
+                                <i class="icon-mid bi bi-exclamation-triangle"></i>
+                                &nbsp; 질문을 작성하려면 로그인을 해주세요.
+                            </div>
+                            {% endif %}
                         </div>
                         <div class="card-body">
-                        <table class="table table-striped" id="table1">
-                            <thead>
-                                <tr>
-                                    <th>질문</th>
-                                    <th>태그</th>
-                                    <th>게시일시</th>
-                                    <th>작성자</th>
-                                    <th>답변등록여부</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for q in object_list %}
-                                <tr>
-                                    <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question }}</a>
-                                    - <a href="{% url 'dailyclass:question_update_form' q.pk %}"
-                                        class="badge bg-secondary">수정하기</a> </td>
-                                    <td>{{ q.qna_question_tag }}</td>
-                                    <td>{{ q.date }}</td>
-                                    <td>{{ q.user_id }}</td>
-                                    <td>
-                                        <span class="badge bg-success">Active</span>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                <div class="dataTable-container">
+                                    <table class="table table-striped table-hover dataTable-table" id="table1">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 43%">
+                                                    <i class="icon-mid bi bi-patch-question me-2"></i>질문
+                                                </th>
+                                                <th data-sortable>
+                                                    <i class="icon-mid bi bi-tag me-2"></i>태그
+                                                </th>
+                                                <th style="width: 22%">
+                                                    <i class="icon-mid bi bi-calendar-plus me-2"></i>게시일시
+                                                </th>
+                                                <th>
+                                                    <i class="icon-mid bi bi-person-circle me-2"></i>작성자
+                                                </th>
+                                                <th>
+                                                    <i class="icon-mid bi bi-chat-right-text me-2"></i>답변등록여부
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for q in object_list %}
+                                            <tr>
+                                                <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question|slice:":150"|safe }}</a></td>
+                                                <td>{{ q.qna_question_tag }}</td>
+                                                <td>{{ q.date }}</td>
+                                                <td>{{ q.user_id }}</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     </section>
@@ -90,6 +109,7 @@
     </div>
     <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/simple-datatables/simple-datatables.js' %}"></script>
 
     <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
     <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>

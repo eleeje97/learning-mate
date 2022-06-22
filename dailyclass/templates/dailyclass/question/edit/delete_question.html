@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>질문있어요! - 질문 수정 페이지</title>
+    <title>질문있어요! - 질문 삭제 페이지</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -20,8 +20,6 @@
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
 
 </head>
-
-
 
 <body>
     <div id="app">
@@ -56,19 +54,17 @@
                                 <form class="form form-vertical" method="POST">
                                         <div class="row">
                                             {% csrf_token %}
-                                            {{form.media}}
-                                            {{form.as_p}}
-                                            <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="submit"
-                                                    class="btn btn-primary me-1 mb-1">수정 완료</button>
+                                            <strong>정말로 삭제하시겠습니까?</strong><br><br>
+                                            <div class="buttons">
+                                                <button class="btn btn-danger">삭제하기</button>
                                                 <a href="{% url 'dailyclass:question_list' %}"
-                                                    class="btn btn-light-secondary me-1 mb-1">작성 취소</a>
+                                                    class="btn btn-light-secondary">돌아가기</a>
                                             </div>
                                         </div>
                                 </form>
                         </div>
                     </div>
-                </section>
+                    </section>
                 </div>
 
                 <footer>
@@ -81,21 +77,21 @@
                     </div>
                 </div>
                 </footer>
-            </div>
-            {% else %}
-            <div id="error">
-                <div class="error-page container">
-                    <div class="col-md-8 col-12 offset-md-2">
-                        <img class="img-error img-fluid" src="{% static 'assets/images/samples/error-403.png' %}" alt="Not Found">
-                        <div class="text-center">
-                            <h1 class="error-title">Forbidden</h1>
-                            <p class="fs-5 text-gray-600">이 페이지를 볼 권한이 없습니다.</p>
-                            <a href="/dailyclass/classmaterial" class="btn btn-lg btn-outline-primary mt-3">Go Home</a>
+{% else %}
+                <div id="error">
+                    <div class="error-page container">
+                        <div class="col-md-8 col-12 offset-md-2">
+                            <img class="img-error img-fluid" src="{% static 'assets/images/samples/error-403.png' %}" alt="Not Found">
+                            <div class="text-center">
+                                <h1 class="error-title">Forbidden</h1>
+                                <p class="fs-5 text-gray-600">이 페이지를 볼 권한이 없습니다.</p>
+                                <a href="/dailyclass/classmaterial" class="btn btn-lg btn-outline-primary mt-3">Go Home</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+{% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
     <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
