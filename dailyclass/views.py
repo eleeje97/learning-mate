@@ -4,6 +4,7 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.paginator import Paginator
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
@@ -152,3 +153,18 @@ class DeleteQuestionView(DeleteView):
     model = QnA
     template_name = 'dailyclass/question/edit/delete_question.html'
     success_url = reverse_lazy('dailyclass:question_list')
+#
+# def information(request):
+#     page = request.GET.get('page', '1')  # 페이지
+#     kw = request.GET.get('kw', '')
+#     question_list = QnA.objects.order_by('-create_date').filter(board_type=2)
+#     if kw:
+#         question_list = question_list.filter(
+#             Q(subject__icontains=kw) |  # 제목 검색
+#             Q(content__icontains=kw) |  # 내용 검색
+#             Q(answer__content__icontains=kw)  # 답변 검색
+#         ).distinct()
+#     paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
+#     page_obj = paginator.get_page(page)
+#     context = {'question_list': page_obj, 'page': page, 'kw': kw}
+#     return render(request, 'dailyclass/question_list.html', context)
