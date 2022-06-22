@@ -68,7 +68,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 43%">
-                                                    <i class="icon-mid bi bi-patch-question me-2"></i>질문
+                                                    <i class="icon-mid bi bi-file-text me-2"></i>질문
                                                 </th>
                                                 <th data-sortable>
                                                     <i class="icon-mid bi bi-tag me-2"></i>태그
@@ -80,19 +80,19 @@
                                                     <i class="icon-mid bi bi-person-circle me-2"></i>작성자
                                                 </th>
                                                 <th>
-                                                    <i class="icon-mid bi bi-chat-right-text me-2"></i>답변등록여부
+                                                    <i class="icon-mid bi bi-chat-right-text me-2"></i>답변
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for q in object_list %}
                                             <tr>
-                                                <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question|slice:":150"|safe }}</a></td>
+                                                <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question|striptags|truncatechars:100 }}</a></td>
                                                 <td>{{ q.qna_question_tag }}</td>
-                                                <td>{{ q.date }}</td>
+                                                <td>{{ q.date|date:"y년 m월 d일 h:m" }}</td>
                                                 <td>{{ q.user_id }}</td>
                                                 <td>
-                                                    <span class="badge bg-success">Active</span>
+                                                    <span class="badge bg-success">답변완료</span>
                                                 </td>
                                             </tr>
                                             {% endfor %}

@@ -15,12 +15,11 @@
                         <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>정보공유</h3>
                             <p class="text-subtitle text-muted">알고있는 유용한 정보 서로 공유해요~</p>
-
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Community</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'community:notice_create' %}">Community</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">정보공유</li>
                                 </ol>
                             </nav>
@@ -37,11 +36,11 @@
                                         <div class="input-group">
                                             <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-secondary" type="button" id="btn_search"><i class="bi bi-search"></i></button>
+                                                <button class="btn btn-secondary" type="button" id="btn_search"><i class="icon-mid bi bi-search"></i></button>
                                             </div>
                                         </div>
                                      </div>
-                            </div>
+                                </div>
                             <table class="table table-striped" id="table1">
                                 <thead>
                                          <tr>
@@ -60,18 +59,18 @@
                 <a href="{% url 'community:information_detail' question.id %}">{{ question.subject }}</a>
                 {% if question.answer_set.count > 0 %}
                 <span class="text-danger small mx-2">{{ question.answer_set.count }}</span>
-                    {% endif %}
-                    </td>
-                    <td>{{ question.user }}</td>
-                    <td>{{ question.create_date }}</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="4">질문이 없습니다.</td>
-                </tr>
                 {% endif %}
-            </tbody>
+                </td>
+                <td>{{ question.user }}</td>
+                <td>{{ question.create_date }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="4">질문이 없습니다.</td>
+            </tr>
+            {% endif %}
+        </tbody>
         </table>
     <!-- 페이징처리 시작 -->
     <ul class="pagination justify-content-center">
