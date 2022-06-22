@@ -20,35 +20,17 @@
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
     <style>
-@keyframes blink-effect {
-  50% {
-    opacity: 0;
-  }
-}
 
-.blink {
-  animation: blink-effect 1s step-end infinite;
-
-  /*
-  animation-name: blink-effect;
-  animation-duration: 1s;
-  animation-iteration-count:infinite;
-  animation-timing-function:step-end;
-  */
-}
 
 </style>
 </head>
 <body>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 {% block content %}
-
 {% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
-
 </body>
 {% block script %}
-
 
 {% endblock %}
 
