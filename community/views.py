@@ -28,7 +28,7 @@ def notice(request):
             daytime.append(True)
         else:
             daytime.append(False)
-
+    print(daytime)
     context = {'question_list': page_obj, 'page': page, 'kw': kw, 'daytime': daytime}
     return render(request, 'notice/question_list.html', context)
 
