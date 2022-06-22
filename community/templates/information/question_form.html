@@ -1,6 +1,67 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<html lang="en">
+
+<head>
+    <style>
+            html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            }
+
+            .center-outer {
+            display: table;
+            width: 100%;
+            height: 100%;
+            }
+
+            .center-inner {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            }
+
+            /* Essential CSS - Makes the effect work */
+
+            body {
+            background-color: #F2F7FF;
+            }
+
+            .bubbles {
+            display: inline-block;
+            font-family: arial;
+            position: relative;
+            }
+
+            .bubbles h1 {
+            position: relative;
+            margin: 1em 0 0;
+            font-family: 'Kirang Haerang', cursive; 'Luckiest Guy', cursive;
+            color: darkblue;
+            z-index: 2;
+            font-size: 80px;
+            font-weight: bold;
+            }
+
+            .individual-bubble {
+            position: absolute;
+            border-radius: 100%;
+            bottom: -20px;
+            background-color: darkblue;
+            z-index: 1;
+
+            }
+
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap" rel="stylesheet">
+
+</head>
+<body>
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
     <form method="post">
@@ -43,8 +104,10 @@
 
         <script src="{% static 'assets/js/main.js' %}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.js"></script>
-        <script type="text/javascript" src="/static/js/lang/summernote-ko-KR.js"></script>
+         <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="{% static 'lmate.js' %}"></script>
+
+
     </form>
     <footer>
                 <div class="footer clearfix mb-0 text-muted">
@@ -57,4 +120,17 @@
                 </div>
     </footer>
 </div>
+        <footer>
+            <div class="center-outer">
+                <div class="center-inner">
+
+                    <div class="bubbles">
+                        <h1>Learning Mate</h1>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+</body>
+</html>
 {% endblock %}
