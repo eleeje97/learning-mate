@@ -33,3 +33,25 @@ class EditForm(forms.ModelForm):
             'qna_question': '질문이 무엇인가요? ',
             'qna_question_tag': '어떤 언어에 대한 질문인가요? ',
         }
+
+
+from django import forms
+#from .models import Question2, Answer2
+
+
+# class QuizForm(forms.ModelForm):
+#     class Meta:
+#         model = Question2  # 사용할 모델
+#         fields = ['subject', 'content']
+#         labels = {
+#             'subject': '제목',
+#             'content': '내용',
+#             'board_type' : '게시판타입'
+#         }
+# class AnswerForm(forms.ModelForm):
+#     class Meta:
+#         model = Answer2
+#         fields = ['content']
+#         labels = {
+#             'content': '답변내용',
+#         }
