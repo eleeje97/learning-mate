@@ -74,7 +74,7 @@
                                                     <i class="icon-mid bi bi-tag me-2"></i>태그
                                                 </th>
                                                 <th style="width: 22%">
-                                                    <i class="icon-mid bi bi-calendar-plus me-2"></i>게시일시
+                                                    <i class="icon-mid bi bi-calendar-plus me-2"></i>작성일
                                                 </th>
                                                 <th>
                                                     <i class="icon-mid bi bi-person-circle me-2"></i>작성자
@@ -88,7 +88,9 @@
                                             {% for q in object_list %}
                                             <tr>
                                                 <td><a href="{% url 'dailyclass:single_question_page' q.pk %}">{{ q.qna_question|striptags|truncatechars:100 }}</a></td>
-                                                <td>{{ q.qna_question_tag }}</td>
+                                                <td>
+                                                    <span class="badge bg-light-info">{{ q.qna_question_tag }}</span>
+                                                </td>
                                                 <td>{{ q.date|date:"y년 m월 d일 h:m" }}</td>
                                                 <td>{{ q.user_id }}</td>
                                                 <td>

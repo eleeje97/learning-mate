@@ -49,15 +49,24 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Default</h4>
+                                <h4 class="card-title">{{ qna.qna_question|striptags|truncatechars:50 }}</h4>
                             </div>
                             <div class="card-body">
-                                <p>You can use default divider with <code>&lt;hr&gt;</code><code></code></p><hr><p></p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident nostrum
-                                    numquam
-                                    reprehenderit facilis. Dolor blanditiis commodi voluptate esse voluptatum aut
-                                    natus,
-                                    distinctio at, officiis ipsam molestiae doloribus ratione corrupti dolorum.</p>
+                                <p>Question: {{ qna.qna_question|safe }}</p>
+                                <hr><p></p>
+                                <p>Created at: {{ qna.date }}</p>
+                                <p>By: {{ qna.user_id }}
+
+                                {% if user.is_authenticated %}
+                                    {% if user == qna.user_id %}
+                                    - <a href="{% url 'dailyclass:question_update_form' qna.pk %}"
+                                        class="badge bg-secondary">수정하기</a>
+                                     <a href="{% url 'dailyclass:delete_question' qna.pk %}"
+                                    class="badge bg-secondary">삭제하기</a>
+                                    {% endif %}
+                                {% endif %}
+
+                                </p>
                             </div>
                         </div>
                     </div>
