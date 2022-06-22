@@ -59,13 +59,17 @@
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="submit"
                                                     class="btn btn-primary me-1 mb-1">질문 등록</button>
-                                                <button type="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1">작성 취소</button>
+                                                <a href="{% url 'dailyclass:question_list' %}"
+                                                    class="btn btn-light-secondary me-1 mb-1">작성 취소</a>
                                             </div>
                                         </div>
                                 </form>
                         </div>
                     </div>
+                        <script>
+                            var name = "{{ user.id }}";
+                            document.getElementById("elder").value = name;
+                        </script>
                 </section>
                 </div>
 
@@ -91,5 +95,6 @@
 
     <script src="{% static 'assets/js/main.js' %}"></script>
 </body>
+
 
 </html>

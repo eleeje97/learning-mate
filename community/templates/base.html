@@ -19,22 +19,27 @@
     <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+    <style>
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
 
+.blink {
+  animation: blink-effect 1s step-end infinite;
 
-<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>-->
-<!--    <script>-->
-<!--        $(document).ready(function(){-->
-<!--            $('#id_description').summernote({-->
-<!--                height:300-->
-<!--            });-->
-<!--        });-->
-<!--    </script>-->
+  /*
+  animation-name: blink-effect;
+  animation-duration: 1s;
+  animation-iteration-count:infinite;
+  animation-timing-function:step-end;
+  */
+}
 
+</style>
 </head>
 <body>
-<!--{% include "community_sidebar.html" %}-->
-<!--{% include "community_navbar.html" %}-->
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 {% block content %}
 
