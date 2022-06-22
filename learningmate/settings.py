@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'common',
     'ckeditor',
     'ckeditor_uploader',
+    'django_drf_filepond',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +129,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# The URL base used for the URL import
+URL_BASE = r'^fp/'
+
+DJANGO_DRF_FILEPOND_FILE_STORE_PATH = os.path.join(BASE_DIR, 'media')
