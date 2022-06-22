@@ -43,7 +43,7 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'dailyclass:classmaterial' %}">오늘의 클래스</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">학습자료 공유</li>
                                     </ol>
                                 </nav>
@@ -83,7 +83,7 @@
                                     </div>
 
                                 <div class="card-body">
-                                    <form method="POST" enctype="multipart/form-data">
+                                    <form method="POST" enctype="multipart/form-data" action="{% url 'dailyclass:classmaterial' %}">
                                         {% csrf_token %}
 
                                         <div class="form-group mb-3">
@@ -91,10 +91,11 @@
                                             <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="2"></textarea>
                                         </div>
 
-    <!--                                        &lt;!&ndash; Basic file uploader &ndash;&gt;-->
-    <!--                                        <input type="file" name="uploaded_file" class="basic-filepond">-->
-    <!--                                        <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>-->
 
+                                        <!-- Basic file uploader -->
+<!--                                        <input type="file" id="inputGroupFile04" name="uploaded_file" class="basic-filepond"-->
+<!--                                        aria-describedby="inputGroupFileAddon04" aria-label="Upload">-->
+<!--                                        <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>-->
 
                                             <div class="col-md-6 mb-1">
                                                 <fieldset>
