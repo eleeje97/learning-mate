@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question Form</title>
+    <title>질문있어요! - 질문 작성 페이지</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'dailyclass:classmaterial' %}">오늘의 클래스</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">질문있어요!</li>
                                     </ol>
                                 </nav>
@@ -49,33 +49,21 @@
                     </div>
                     <section class="section">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">무엇이 궁금하신가요?</h4>
-                        </div>
-                        <div class="card-body">
-                            <form class="form form-horizontal" method="POST">
-                                {% csrf_token %}
-                                {{form.media}}
-                                {{form.as_p}}
-                                <div class="form-body">
-                                    <div class="row">
-                                        <div id="full">
-                                            <div class="mb-3">
-                                            {{ qna.qna_queston|safe }}
 
-                                            <p>이 메세지를 지우고 여기에 질문을 작성하시면 됩니다</p>
-                                            <p><br></p>
+                        <div class="card-body">
+                                <form class="form form-vertical" method="POST">
+                                        <div class="row">
+                                            {% csrf_token %}
+                                            {{form.media}}
+                                            {{form.as_p}}
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="submit"
+                                                    class="btn btn-primary me-1 mb-1">질문 등록</button>
+                                                <button type="reset"
+                                                    class="btn btn-light-secondary me-1 mb-1">작성 취소</button>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit"
-                                            class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset"
-                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
                         </div>
                     </div>
                 </section>

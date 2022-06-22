@@ -1,7 +1,8 @@
 {% load static %}
 <html lang="ko">
 <head>
-     <meta charset="UTF-8">
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataTable - Mazer Admin Dashboard</title>
 
@@ -18,48 +19,53 @@
     <title>커뮤니티!</title>
 </head>
 <body>
-{% include "navbar.html" %}
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-{% block content %}
-{% endblock %}
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-<div class="main_content">
-            <div class="question_in_img"><br><strong>Q : 오늘의 퀴즈</strong></div>
-
-            <img src="{{i.img1.url}}" id="question_img">
+{% include "dailyclass_navbar.html" %}
+{% include "dailyclass_sidebar.html" %}
+<div class="main_content" align="middle">
+    {# for i in questions #}
+            <div class="question_in_img"><h4><br><strong>Q : {{quiz.quiz_question}}</strong></h4></div><br>
             <form class="question_form">
                 <div class="radio-group">
                     <div class="each-radio-img">
                         <label class="labl-img">
-                            <input type="radio" name="name" id="option1" value="{{i.option1}}">
-                            <div class="options">{{i.opiton1}}</div>
+                            <input type="radio" name="name" id="option1" value="{{quiz.option1}}">
+                            {{quiz.option1}}
                         </label>
                     </div>
                     <br>
                     <div class="each-radio-img">
                         <label class="labl-img">
-                            <input type="radio" name="name" id="option2" value="{{i.option2}}">
-                            <div class="options">{{i.opiton2}}</div>
+                            <input type="radio" name="name" id="option2" value="{{quiz.option2}}">
+                            {{quiz.option2}}
                         </label>
                     </div>
                     <br>
                      <div class="each-radio-img">
                         <label class="labl-img">
-                            <input type="radio" name="name" id="option3" value="{{i.option3}}">
-                            <div class="options">{{i.opiton3}}</div>
+                            <input type="radio" name="name" id="option3" value="{{quiz.option3}}">
+                           {{quiz.option3}}
                         </label>
                     </div>
                     <br>
                      <div class="each-radio-img">
                         <label class="labl-img">
-                            <input type="radio" name="name" id="option4" value="{{i.option4}}">
-                            <div class="options">{{i.opiton4}}</div>
+                            <input type="radio" name="name" id="option4" value="{{quiz.option4}}">
+                            {{quiz.option4}}
                         </label>
                     </div>
                 </div>
+                <fieldset>
+                    <legend>  </legend>
+                    <br> <input type="button" value="답안 제출">
+                </fieldset>
+                {# endfor #}
             </form>
-
     </div>
+
+</div>
+
+{% block content %}
+{% endblock %}
 {% block script %}
 {% endblock %}
 

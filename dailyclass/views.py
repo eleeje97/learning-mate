@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.conf import settings
@@ -7,17 +8,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
+from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
 from .forms import QuestionForm
-from .models import QnA, QnA_answer, ClassMaterial, Quiz
+
 
 
 # 학습자료 공유
 def classmaterial(request):
+    if request.GET.get('date') is None:
+        date = datetime.datetime.now().date()
+    else:
+        date = datetime.datetime.strptime(request.GET.get('date'), "%Y-%m-%d").date()
+
     upload_file(request)
-    file_list = fileList(request)
-    return render(request, 'dailyclass/classmaterial.html', {'file_list': file_list})
+    file_list = fileList(request, date)
+
+    return render(request, 'dailyclass/classmaterial.html', {'file_list': file_list, 'date': date})
 
 
 def upload_file(request):
@@ -34,8 +42,9 @@ def upload_file(request):
             material.save()
 
 
-def fileList(request):
-    file_list = ClassMaterial.objects.all()
+def fileList(request, date):
+    # file_list = ClassMaterial.objects.all()
+    file_list = ClassMaterial.objects.filter(date__range=[date, date + datetime.timedelta(days=1)])
     return file_list
 
 
@@ -66,17 +75,15 @@ def delete_file(request, file_id):
     return redirect('dailyclass:classmaterial')
 
 
-
-# Quiz
-lst=[]
-def home(request):
-    return render(request, 'quiz.html')
-
+#퀴즈
 def quiz(request):
-    template_name = 'dailyclass/quiz.html'
-    obj = Quiz.objects.all()
-    return render(request, template_name, {"obj":obj})
+    quiz = Quiz.objects.get(pk=1)
 
+    return render(request, 'dailyclass/quiz/quiz.html',{"quiz":quiz})
+
+def result(request):
+    res = result.object.all()
+    return render(request, 'dailyclass/quiz/result.html', {"res":res})
 
 # 질문있어요!
 def question_form(request):
@@ -90,30 +97,26 @@ def test_view(request):
 class question_list(ListView):
     model = QnA
     template_name = 'dailyclass/question_list.html'
+    ordering = ['-pk']
+
 
 
 class single_question_page(DetailView):
     model = QnA
     template_name = 'dailyclass/question/single_question_page.html'
 
-    def get_object(self, queryset=None):
-        object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
-        return object
+    # def get_object(self, queryset=None):
+    #     object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
+    #     return object
 
+class AddQuestionView(CreateView):
+    model = QnA
+    form_class = QuestionForm
+    template_name = 'dailyclass/question/question_form.html'
+    # fields = '__all__'
+    # fields = ('qna_question', 'qna_question_tag')
 
-
-def question_create(request):
-    if request.method == 'POST':
-        print(request.POST)
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            qna = form.save(commit=False)
-            qna.user_id = request.user
-            qna.qna_question = request.POST['qna_question']
-            qna.date = timezone.now()
-            qna.save()
-            return redirect('dailyclass:question_list')
-    else:
-        form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'dailyclass/question_form.html', context)
+class UpdateQuestionView(UpdateView):
+    model = QnA
+    template_name = 'dailyclass/question/edit/question_update_form.html'
+    fields = ['qna_question', 'qna_question_tag']

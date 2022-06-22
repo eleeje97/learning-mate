@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<div id="app">
-    {% include "community_sidebar.html" %}
-    <div id="main" class='layout-navbar'>
-        <header class='mb-3'>
-            {% include 'community_navbar.html' %}
-        </header>
-        <div id="main-content">
+    <div id="app">
+        {% include "community_sidebar.html" %}
+        <div id="main" class='layout-navbar'>
+            <header class='mb-3'>
+                {% include 'community_navbar.html' %}
+            </header>
+            <div id="main-content">
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>와글와글</h3>
+                            <p class="text-subtitle text-muted">수다 떨 사람 여기로 모여~</p>
 
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
@@ -28,19 +28,18 @@
                 </div>
                 <section class="section">
                     <div class="card">
-
                         <div class="card-body">
                             <div class="row my-3">
                                 <div class="col-6">
                                 </div>
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                             <table class="table table-striped" id="table1">
                                 <thead>
@@ -116,8 +115,10 @@
     </ul>
     <!-- 페이징처리 끝 -->
     <a href="{% url 'community:question_create' %}" class="btn btn-primary">글쓰기</a>
-
-<footer>
+                        </div>
+                    </div>
+                </section>
+            <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2022 &copy; Mazer</p>
@@ -126,7 +127,11 @@
                         <p>여러분의 수업에 <a href="#">Learning Mate</a>가 함께합니다!</p>
                     </div>
                 </div>
-     </footer>
+            </footer>
+            </div>
+        </div>
+        </div>
+    </div>
  <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 
@@ -135,12 +140,14 @@
  <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
 
  <script src="{% static 'assets/js/main.js' %}"></script>
-</div>
+
 <form id="searchForm" method="get" action="{% url 'community:chat' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
 </form>
 {% endblock %}
+
+
 {% block script %}
 <script type='text/javascript'>
 const page_elements = document.getElementsByClassName("page-link");

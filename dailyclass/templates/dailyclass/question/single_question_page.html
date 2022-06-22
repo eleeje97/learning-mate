@@ -1,14 +1,80 @@
 <!DOCTYPE html>
-<html lang="ko">
+{% load static %}
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>질문있어요! {{ qna.qna_id }}번 질문</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.bubble.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/quill/quill.snow.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+
 </head>
+
 <body>
+    <div id="app">
+        {% include 'dailyclass_sidebar.html' %}
+        <div id="main" class='layout-navbar'>
+            <header class='mb-3'>
+                {% include 'dailyclass_navbar.html' %}
+            </header>
+            <div id="main-content">
 
-<h1>{{ qna.qna_question }}</h1>
-<h4>created at: {{ qna.date }}</h4>
-<p>by: {{ qna.user_id }}</p>
+                <div class="page-heading">
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h3>질문있어요!</h3>
+                                <p class="text-subtitle text-muted">자유롭게 질문과 답변을 남겨주세요</p>
+                            </div>
+                            <div class="col-12 col-md-6 order-md-2 order-first">
+                                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">질문있어요!</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="section">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Question: {{ qna.qna_question }}</h4>
+                            <h6>Created at: {{ qna.date }}</h6>
+                            <p>By: {{ qna.user_id }}
+                            - <a href="{% url 'dailyclass:question_update_form' qna.pk %}"
+                                class="badge bg-secondary">수정하기</a>
+                            </p>
 
+                            <div class="buttons">
+                                    <a href="{% url 'dailyclass:question_list' %}" class="btn btn-primary rounded-pill">목록보기</a>
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assets/vendors/quill/quill.core.js' %}"></script>
+    <script src="{% static 'assets/vendors/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/js/pages/form-editor.js' %}"></script>
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
 </body>
+
 </html>
