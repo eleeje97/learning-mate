@@ -1,0 +1,50 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTable - Mazer Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/simple-datatables/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+    <title>커뮤니티!</title>
+</head>
+<body>
+{% include "dailyclass_navbar.html" %}
+{% include "dailyclass_sidebar.html" %}
+<div class="main_content" align="middle">
+
+    <div class="test_num">
+        will you quiz with me?
+    </div>
+    <div class="small_title">
+	    장고에 대해 복습해볼까요?
+    </div>
+    <div class="big_title">
+	    장고 첫 장
+    </div>
+    <form action="" method="get">
+        <div class="pnu-name">날짜?아직 미정 안 넣어줘도 되고</div>
+    <div class="content">
+	<div class="start_btn">
+		<input class="btn" type="submit" value="퀴즈를 풀어봐요📝✏"/>
+	</div>
+	<div class="description>▷ 문제는 객관식입니다.</div>
+	<div class="description2>▷ 한 문제당 하나의 문항을 골라주세요.</div>
+    </div>
+    </form>
+{% block content %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+
+</body>
+</html>

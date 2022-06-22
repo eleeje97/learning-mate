@@ -13,6 +13,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from .forms import QuestionForm
 from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
 
+#여기서 전역변수로 지정해주겠습니다
 
 # 학습자료 공유
 def classmaterial(request):
@@ -68,14 +69,25 @@ def delete_file(request, file_id):
 
 
 #퀴즈
-def quiz(request):
-    quiz = Quiz.objects.get(pk=1)
 
+def quiz_home(request):
+    return render(request, 'dailyclass/quiz/quiz_home.html')
+
+def quiz(request):
+    quiz = Quiz.objects.filter(quiz_id=request.POST['quiz_id'])
     return render(request, 'dailyclass/quiz/quiz.html',{"quiz":quiz})
 
 def result(request):
     res = result.object.all()
-    return render(request, 'dailyclass/quiz/result.html', {"res":res})
+    return render(request, 'dailyclass/quiz/result.html',) #{"res":res})
+
+# def score(request):
+#     num = 1
+#     if request.POST:
+#         num = int(request.POST['answer_num'])
+#         if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
+#             checklst=[]
+#             checklst += result.checking() #boolean?????
 
 # 질문있어요!
 def question_form(request):
@@ -84,6 +96,14 @@ def question_form(request):
   
 def test_view(request):
     return render(request, 'dailyclass/test.html',)
+
+def score(request):
+    num = 1
+    if request.POST:
+        num = int(request.POST['answer_num'])
+        if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
+            checklst=[]
+            checklst += result.checking() #boolean?????
 
 
 class question_list(ListView):

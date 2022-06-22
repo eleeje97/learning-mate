@@ -18,7 +18,11 @@ urlpatterns=[
     path('question_form/', AddQuestionView.as_view(), name="question_form"),
 
     path('question/create/', views.question_create, name='question_create'),
+    path('quizhome/',views.quiz_home, name='quiz_home'),
     path('quiz/', views.quiz, name='quiz'),
+    path('quiz2/', views.quiz, name='quiz'),
+    path('quiz3/', views.quiz, name='quiz'),
+    path('quiz4/', views.quiz, name='quiz'),
     path('result/', views.result, name='result'),
     #path('save_ans/', views.save_ans, name='saveans'),
 ]
