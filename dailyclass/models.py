@@ -47,7 +47,7 @@ class QnA_answer(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s - %s' % (self.qna_id.qna_question, self.user_id)
+        return '%s - %s' % (self.qna_id, self.user_id)
 
 
 class Quiz(models.Model):
