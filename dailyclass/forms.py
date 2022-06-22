@@ -8,7 +8,7 @@ class QuestionForm(forms.ModelForm):
         fields = ('qna_question', 'qna_question_tag', 'user_id')
 
         widgets = {
-            'qna_question': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
+            'qna_question': forms.Textarea(attrs={'class': 'form-control', 'rows': 10, 'required': True}),
             'qna_question_tag': forms.Select(attrs={'class': 'form-control'}, choices=QnA.question_tags),
             'user_id': forms.TextInput(attrs={'class': 'form-control', 'id': 'elder', 'type': 'hidden'})
         }
