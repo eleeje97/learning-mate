@@ -21,6 +21,7 @@
         </div>
         {% endif %}
         <!-- 오류표시 End -->
+
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
@@ -31,6 +32,7 @@
             <textarea class="form-control" name="content"
                       id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
         </div>
+
 
         <input type="hidden" value="1" name="board_type">
 

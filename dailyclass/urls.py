@@ -1,7 +1,8 @@
 from django.urls import path, include
 from . import views
 
-from .views import FileDownloadView, question_list, single_question_page, AddQuestionView, UpdateQuestionView, DeleteQuestionView, AddCommentView
+from .views import FileDownloadView, question_list, single_question_page, AddQuestionView, UpdateQuestionView, DeleteQuestionView,\
+    AddCommentView, DeleteAnswerView
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic import TemplateView
 
@@ -21,6 +22,7 @@ urlpatterns=[
     path('question/question_form/', login_required(AddQuestionView.as_view()), name="question_form"),
     path('question/edit/<int:pk>', login_required(UpdateQuestionView.as_view()), name='question_update_form'),
     path('question/edit/<int:pk>/remove', login_required(DeleteQuestionView.as_view()), name='delete_question'),
+    path('answer/edit/<int:pk>/remove', login_required(DeleteAnswerView.as_view()), name='delete_answer'),
     path('question/<int:pk>/comment/', login_required(AddCommentView.as_view()), name='add_comment'),
 
     path('quizhome/',views.quiz_home, name='quiz_home'),
