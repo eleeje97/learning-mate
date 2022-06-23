@@ -51,17 +51,22 @@
                     <div class="card">
                         <div class="card-header">
                             {% if user.is_authenticated %}
-                            <div class="buttons">
-                                <a href="{% url 'dailyclass:question_form' %}" class="btn btn-lg btn-outline-primary rounded-pill">+ 질문하기</a>
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <div class="buttons">
+                                    <a href="{% url 'dailyclass:question_form' %}" class="btn btn-lg btn-outline-primary rounded-pill">+ 질문하기</a>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <div class="input-group">
-                                    <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                            <div class="col-12 col-md-6 order-md-2 order-first">
+
+                                <div class="col-md-6 mb-1">
+                                    <div class="input-group mb-3">
+                                        <form method="GET" action="">
+                                            <input type="text" name="q" placeholder="Search", value="{{ request.GET.q }}">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                             {% else %}
                             <div class="alert alert-light-warning color-warning">
                                 <i class="icon-mid bi bi-exclamation-triangle"></i>
