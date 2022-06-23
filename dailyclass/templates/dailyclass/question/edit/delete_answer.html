@@ -57,7 +57,7 @@
                                             <strong>정말로 삭제하시겠습니까?</strong><br><br>
                                             <div class="buttons">
                                                 <button class="btn btn-danger">삭제하기</button>
-                                                <a href="{% url 'dailyclass:single_question_page' %}"
+                                                <a href="{% url 'dailyclass:single_question_page' qna_answer.qna.pk %}"
                                                     class="btn btn-light-secondary">돌아가기</a>
                                             </div>
                                         </div>

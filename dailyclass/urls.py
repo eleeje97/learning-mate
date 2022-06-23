@@ -22,7 +22,7 @@ urlpatterns=[
     path('question/question_form/', login_required(AddQuestionView.as_view()), name="question_form"),
     path('question/edit/<int:pk>', login_required(UpdateQuestionView.as_view()), name='question_update_form'),
     path('question/edit/<int:pk>/remove', login_required(DeleteQuestionView.as_view()), name='delete_question'),
-    path('answer/edit/<int:pk>/remove', login_required(DeleteAnswerView.as_view()), name='delete_answer'),
+    path('question/<int:pk>/ans_remove', login_required(DeleteAnswerView.as_view()), name='delete_answer'),
     path('question/<int:pk>/comment/', login_required(AddCommentView.as_view()), name='add_comment'),
 
     path('quizhome/',views.quiz_home, name='quiz_home'),
