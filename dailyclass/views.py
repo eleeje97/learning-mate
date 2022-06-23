@@ -161,7 +161,8 @@ class AddCommentView(CreateView):
         form.instance.qna_id = self.kwargs['pk']
         return super().form_valid(form)
 
-    success_url = reverse_lazy('dailyclass:question_list')
+
+    success_url = '/dailyclass/question/{qna_id}'
 
 
 
@@ -178,3 +179,8 @@ class DeleteQuestionView(DeleteView):
     template_name = 'dailyclass/question/edit/delete_question.html'
     success_url = reverse_lazy('dailyclass:question_list')
 
+
+class DeleteAnswerView(DeleteView):
+    model = QnA_answer
+    template_name = 'dailyclass/question/edit/delete_answer.html'
+    success_url = '/dailyclass/question/{qna_id}'
