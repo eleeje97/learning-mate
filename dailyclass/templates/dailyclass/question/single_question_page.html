@@ -73,17 +73,23 @@
                             </div>
                         </div>
 
+<!--                        여기는 comment section-->
                         <div class="card">
                             <div class="card-body pt-4 bg-grey">
                                 <div class="chat-content">
 
-                                    <br><br>
-                                    <h4>답변...</h4>
 
                                     {% if not qna.answers.all %}
-                                        No Comments Yet...<a href="#">
-                                        Add One</a>
+                                        <h4>아직 등록된 답변이 없어요 😢</h4>
+                                        조금 더 기다려보죠...<br>
+                                        아니면 <a href="{% url 'dailyclass:add_comment' qna.pk %}"
+                                               class="btn-sm btn-outline-success">여기를 눌러 답변을 등록</a> 하시겠어요?
                                     {% else %}
+                                        <h4>기다리던 답변이 등록되었어요! 😉</h4>
+                                        도움이 되셨나요?<br>
+                                        아니면 <a href="{% url 'dailyclass:add_comment' qna.pk %}"
+                                               class="btn-sm btn-outline-success">여기를 눌러 답변을 작성</a> 하는건 어떠세요?
+                                        <hr>
                                         {% for answer in qna.answers.all %}
                                             {% if answer.user_id != user %}
                                             <div class="chat chat-left">

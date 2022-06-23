@@ -14,7 +14,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 
 from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
-from .forms import QuestionForm, EditForm
+from .forms import QuestionForm, EditForm, CommentForm
 #from .models import Question, Answer, User
 from django.http import HttpResponseNotAllowed
 #from .forms import QuestionForm, AnswerForm
@@ -124,6 +124,14 @@ class question_list(ListView):
     template_name = 'dailyclass/question_list.html'
     ordering = ['-pk']
 
+    # 검색 기능 완성!
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        query = self.request.GET.get('q')
+        if query:
+            return qs.filter(qna_question__icontains = query)
+        return qs
+
 
 
 class single_question_page(DetailView):
@@ -144,6 +152,16 @@ class AddQuestionView(CreateView):
     # fields = ('qna_question', 'qna_question_tag')
 
 
+class AddCommentView(CreateView):
+    model = QnA_answer
+    form_class = CommentForm
+    template_name = 'dailyclass/question/add_comments.html'
+    #fields = '__all__'
+    def form_valid(self, form):
+        form.instance.qna_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('dailyclass:question_list')
 
 
 
