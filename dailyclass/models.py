@@ -46,8 +46,10 @@ class QnA_answer(models.Model):
     qna_answer = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
         return f'{self.user_id}::{self.qna_answer}'
+
 
 
 class Quiz(models.Model):
