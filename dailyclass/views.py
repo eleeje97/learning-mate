@@ -13,7 +13,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .models import QnA, QnA_answer, ClassMaterial, Quiz, result
+from .models import QnA, QnA_answer, ClassMaterial, Quiz
 from .forms import QuestionForm, EditForm, CommentForm
 #from .models import Question, Answer, User
 from django.http import HttpResponseNotAllowed
@@ -23,7 +23,6 @@ from django.contrib import messages
 from django.db.models import Q
 
 
-#여기서 전역변수로 지정해주겠습니다
 
 # 학습자료 공유
 def classmaterial(request):
@@ -91,12 +90,13 @@ def quiz_home(request):
     return render(request, 'dailyclass/quiz/quiz_home.html')
 
 def quiz(request):
-    quiz = Quiz.objects.filter(pk=1)#(quiz_id=request.POST['quiz_id'])
-    return render(request, 'dailyclass/quiz/quiz.html')#{"quiz":quiz})
+    quiz_id=request.GET['quiz_id']
+    quiz = Quiz.objects.filter(pk=quiz_id)
+    return render(request, 'dailyclass/quiz/quiz.html',{'quiz':quiz})
 
-def result(request):
-    res = result.object.all()
-    return render(request, 'dailyclass/quiz/result.html',) #{"res":res})
+# def result(request):
+#     res = result.object.all()
+#     return render(request, 'dailyclass/quiz/result.html',) #{"res":res})
 
 # def score(request):
 #     num = 1
@@ -116,7 +116,7 @@ def score(request):
         num = int(request.POST['answer_num'])
         if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
             checklst=[]
-            checklst += result.checking() #boolean?????
+            #checklst += result.checking() #boolean?????
 
 
 class question_list(ListView):
@@ -141,8 +141,6 @@ class single_question_page(DetailView):
     # def get_object(self, queryset=None):
     #     object = get_object_or_404(QnA, pk=self.kwargs['qna_id'])
     #     return object
-
-
 
 class AddQuestionView(CreateView):
     model = QnA

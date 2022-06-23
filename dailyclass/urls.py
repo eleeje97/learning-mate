@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from . import static
 
 from .views import FileDownloadView, question_list, single_question_page, AddQuestionView, UpdateQuestionView, DeleteQuestionView, AddCommentView
 from django.contrib.auth.decorators import login_required, permission_required
@@ -23,11 +24,7 @@ urlpatterns=[
     path('question/edit/<int:pk>/remove', login_required(DeleteQuestionView.as_view()), name='delete_question'),
     path('question/<int:pk>/comment/', login_required(AddCommentView.as_view()), name='add_comment'),
 
-    path('quizhome/',views.quiz_home, name='quiz_home'),
+    path('quizhome/',views.quiz_home, name='quizhome'),
     path('quiz/', views.quiz, name='quiz'),
-    #path('quiz2/', views.quiz, name='quiz'),
-    #path('quiz3/', views.quiz, name='quiz'),
-    #path('quiz4/', views.quiz, name='quiz'),
-    #path('result/', views.result, name='result'),
-    #path('save_ans/', views.save_ans, name='saveans'),
-]
+
+] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -9,6 +9,7 @@
     left:15%;
     }
 </style>
+
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
@@ -31,14 +32,14 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{% url 'dailyclass:quiz' %}" class='sidebar-link'>
+                    <a href="{% url 'dailyclass:quizhome' %}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Quiz</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="/dailyclass/question_list" class='sidebar-link'>
+                    <a href="{% url 'dailyclass:quiz' %}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>질문있어요!</span>
                     </a>
@@ -47,6 +48,6 @@
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-        <footer class="lmate"><img src= {% static '/virtual-class.png' %} style="width: 200px; min-width: 200px;"  ></footer>
+        <footer class="lmate"><img src= "{% static '/virtual-class.png' %}" style="width: 200px; min-width: 200px;"  ></footer>
     </div>
 </div>

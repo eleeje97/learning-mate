@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% load static %}
 <html lang="ko">
 <head>
@@ -8,39 +9,42 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/vendors/simple-datatables/style.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
-    <title>커뮤니티!</title>
+    <title>퀴즈</title>
 </head>
 <body>
-{% include "dailyclass_navbar.html" %}
-{% include "dailyclass_sidebar.html" %}
-<div class="main_content" align="middle">
+<div id="app">
+    {% include "dailyclass_sidebar.html" %}
+    <div id="main" class='layout-navbar'>
+        <header class="mb-3">
+    {% include "dailyclass_navbar.html" %}
+        </header>
+        <div class="main_content" align="middle">
+            <img src="{% static 'images/logo.png' %}" alt="기본 이미지입니다">
+            <div class="test_num">
+                <br><h2>오늘의 코딩퀴즈</h2>
+            </div>
+            <div class="small_title">
+                장고에 대해 복습해볼까요?
+            </div>
+            <br><form><input type="date" name="today"></form>
 
-    <div class="test_num">
-        will you quiz with me?
+            <form action="" method="get">
+
+                <br><div class="start_btn">
+                    <input class="btn" type="submit" value="퀴즈를 풀고싶다면 CLICK!📝" onclick="window.open('http://127.0.0.1:8000/dailyclass/quiz/?quiz_id=1')">
+                    <br>
+                    <br>
+                  <input class="btn" type="submit" value="퀴즈사이트로 CLICK!📝" onclick="window.open('https://programmers.co.kr/learn/challenges')">
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="small_title">
-	    장고에 대해 복습해볼까요?
-    </div>
-    <div class="big_title">
-	    장고 첫 장
-    </div>
-    <form action="" method="get">
-        <div class="pnu-name">날짜?아직 미정 안 넣어줘도 되고</div>
-    <div class="content">
-	<div class="start_btn">
-		<input class="btn" type="submit" value="퀴즈를 풀어봐요📝✏"/>
-	</div>
-	<div class="description>▷ 문제는 객관식입니다.</div>
-	<div class="description2>▷ 한 문제당 하나의 문항을 골라주세요.</div>
-    </div>
-    </form>
+</div>
 {% block content %}
 {% endblock %}
 {% block script %}
