@@ -25,6 +25,7 @@ from django.db.models import Q
 
 
 # 학습자료 공유
+@login_required(login_url='accounts:login')
 def classmaterial(request):
     if request.GET.get('date') is None:
         date = datetime.datetime.now().date()
