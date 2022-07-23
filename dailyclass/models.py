@@ -50,6 +50,9 @@ class QnA_answer(models.Model):
     def __str__(self):
         return f'{self.user_id}::{self.qna_answer}'
 
+    def get_absolute_url(self):
+        return reverse('dailyclass:single_question_page', kwargs={'pk': self.qna.pk})
+
 
 class Quiz(models.Model):
     quiz_id = models.BigAutoField(primary_key=True)

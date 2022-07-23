@@ -13,8 +13,9 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .models import QnA, QnA_answer, ClassMaterial
-from .forms import QuestionForm, EditForm, CommentForm
+from .models import QnA, QnA_answer, ClassMaterial, Quiz
+from .forms import QuestionForm, EditForm, CommentForm, EditCommentForm
+
 #from .models import Question, Answer, User
 from django.http import HttpResponseNotAllowed
 #from .forms import QuestionForm, AnswerForm
@@ -25,6 +26,7 @@ from django.db.models import Q
 
 
 # 학습자료 공유
+@login_required(login_url='accounts:login')
 def classmaterial(request):
     if request.GET.get('date') is None:
         date = datetime.datetime.now().date()
@@ -84,40 +86,6 @@ def delete_file(request, file_id):
     return redirect('dailyclass:classmaterial')
 
 
-# #퀴즈
-#
-# def quiz_home(request):
-#     return render(request, 'dailyclass/quiz/quiz_home.html')
-#
-# def quiz(request):
-#     quiz_id=request.GET['quiz_id']
-#     quiz = Quiz.objects.filter(pk=quiz_id)
-#     return render(request, 'dailyclass/quiz/quiz.html',{'quiz':quiz})
-#
-# # def result(request):
-# #     res = result.object.all()
-# #     return render(request, 'dailyclass/quiz/result.html',) #{"res":res})
-#
-# # def score(request):
-# #     num = 1
-# #     if request.POST:
-# #         num = int(request.POST['answer_num'])
-# #         if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
-# #             checklst=[]
-# #             checklst += result.checking() #boolean?????
-
-# # 질문있어요!
-# def test_view(request):
-#     return render(request, 'dailyclass/test.html',)
-#
-# def score(request):
-#     num = 1
-#     if request.POST:
-#         num = int(request.POST['answer_num'])
-#         if quiz.answer == num:  #여기서 인덱스를 어땋게 확인할까
-#             checklst=[]
-#             #checklst += result.checking() #boolean?????
-
 
 class question_list(ListView):
     model = QnA
@@ -170,6 +138,11 @@ class UpdateQuestionView(UpdateView):
     template_name = 'dailyclass/question/edit/question_update_form.html'
     # fields = ['qna_question', 'qna_question_tag']
 
+
+class UpdateAnswerView(UpdateView):
+    model = QnA_answer
+    form_class = EditCommentForm
+    template_name = 'dailyclass/question/edit/edit_comments.html'
 
 
 class DeleteQuestionView(DeleteView):
