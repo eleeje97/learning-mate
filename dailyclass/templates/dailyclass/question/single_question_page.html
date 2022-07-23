@@ -108,8 +108,8 @@
                                                         {{ answer.qna_answer }}
                                                         <hr>
                                                         <small>{{ answer.user_id }} - {{ answer.date }}</small></br>
-<!--                                                        <a href="{% url 'dailyclass:question_update_form' qna.pk %}"-->
-<!--                                                            class="badge bg-secondary">수정하기</a>-->
+                                                        <a href="{% url 'dailyclass:edit_comment' answer.pk %}"
+                                                            class="badge bg-secondary">수정하기</a>
                                                         <a href="{% url 'dailyclass:delete_answer' answer.answer_id %}"
                                                         class="badge bg-secondary">삭제하기</a>
                                                     </div>

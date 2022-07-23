@@ -14,7 +14,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 
 from .models import QnA, QnA_answer, ClassMaterial, Quiz
-from .forms import QuestionForm, EditForm, CommentForm
+from .forms import QuestionForm, EditForm, CommentForm, EditCommentForm
 #from .models import Question, Answer, User
 from django.http import HttpResponseNotAllowed
 #from .forms import QuestionForm, AnswerForm
@@ -171,6 +171,11 @@ class UpdateQuestionView(UpdateView):
     template_name = 'dailyclass/question/edit/question_update_form.html'
     # fields = ['qna_question', 'qna_question_tag']
 
+
+class UpdateAnswerView(UpdateView):
+    model = QnA_answer
+    form_class = EditCommentForm
+    template_name = 'dailyclass/question/edit/edit_comments.html'
 
 
 class DeleteQuestionView(DeleteView):
