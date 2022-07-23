@@ -25,8 +25,8 @@ class EditForm(forms.ModelForm):
         fields = ('qna_question', 'qna_question_tag')
 
         widget = {
-            'qna_question': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
-            'qna_question_tag': forms.ChoiceField(choices=QnA.question_tags, required=True),
+            'qna_question': forms.Textarea(attrs={'class': 'form-control', 'rows': 10, 'required': True}),
+            'qna_question_tag': forms.Select(attrs={'class': 'form-control'}, choices=QnA.question_tags),
         }
 
         labels = {
@@ -50,23 +50,17 @@ class CommentForm(forms.ModelForm):
         }
 
 
-from django import forms
-#from .models import Question2, Answer2
+class EditCommentForm(forms.ModelForm):
+    class Meta:
+        model = QnA_answer
+        fields = ('qna_answer', )
+
+        widgets = {
+            'qna_answer': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
+        }
+
+        labels = {
+            'qna_answer': '답변이 무엇인가요?'
+        }
 
 
-# class QuizForm(forms.ModelForm):
-#     class Meta:
-#         model = Question2  # 사용할 모델
-#         fields = ['subject', 'content']
-#         labels = {
-#             'subject': '제목',
-#             'content': '내용',
-#             'board_type' : '게시판타입'
-#         }
-# class AnswerForm(forms.ModelForm):
-#     class Meta:
-#         model = Answer2
-#         fields = ['content']
-#         labels = {
-#             'content': '답변내용',
-#         }
