@@ -54,43 +54,21 @@ class QnA_answer(models.Model):
         return reverse('dailyclass:single_question_page', kwargs={'pk': self.qna.pk})
 
 
-
 class Quiz(models.Model):
     quiz_id = models.BigAutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, max_length=50, db_column='user_id')
-    quiz_question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.IntegerField()
+    quiz_title = models.CharField(max_length=200)
+    quiz_content = models.TextField()
+    date = models.DateTimeField()
 
-class result(models.Model):
-    result_id = models.BigAutoField(primary_key=True)
+
+class QuizAnswer(models.Model):
+    answer_id = models.BigAutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
-    quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE,db_column='quiz_id')
-    answer_num = models.IntegerField()
-    checking = models.BooleanField()
+    quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE, db_column='quiz_id')
+    answer_content = models.TextField()
+    date = models.DateTimeField()
 
-#여기서 새로 만들 테이블
-class Question2(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject = models.CharField(max_length=200)
-    content = models.TextField()
-    create_date = models.DateTimeField()
-    modify_date = models.DateTimeField(null=True, blank=True)
-    board_type = models.CharField(max_length=6)
-
-    def __str__(self):
-        return self.subject
-
-
-class Answer2(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question2, on_delete=models.CASCADE)
-    content = models.TextField()
-    create_date = models.DateTimeField()
-    modify_date = models.DateTimeField(null=True, blank=True)
 
 class ClassMaterial(models.Model):
     date = models.DateTimeField(auto_now_add=True)

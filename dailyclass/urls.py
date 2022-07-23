@@ -18,7 +18,7 @@ urlpatterns=[
     path('download_file/<int:file_id>/', FileDownloadView.as_view(), name='download'),
     path('delete_file/<int:file_id>/', views.delete_file, name='delete'),
 
-    path('test/', views.test_view),
+
     path('question_list/', question_list.as_view(), name='question_list'),
     path('question/<int:pk>/', single_question_page.as_view(), name='single_question_page'),
     path('question/question_form/', login_required(AddQuestionView.as_view()), name="question_form"),
@@ -28,7 +28,6 @@ urlpatterns=[
     path('question/<int:pk>/comment/', login_required(AddCommentView.as_view()), name='add_comment'),
     path('question/comment/<int:pk>/edit', login_required(UpdateAnswerView.as_view()), name='edit_comment'),
 
-    path('quizhome/',views.quiz_home, name='quizhome'),
-    path('quiz/', views.quiz, name='quiz'),
+
 
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

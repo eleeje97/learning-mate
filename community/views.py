@@ -232,6 +232,8 @@ def answer_delete(request, answer_id):
         answer.delete()
     return redirect('community:community_detail', question_id=answer.question.id)
 
+
+
 # class NoticeListView(ListView):
 #     def get_context_data(self, **kwargs):
 #         notice_fixed = notice.objects.filter(top_fixed=True).order_by('-registered_date')
